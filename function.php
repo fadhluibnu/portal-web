@@ -1,7 +1,7 @@
 <?php
 
 //koneksi
-$conn = mysqli_connect ("localhost","root","portal-dagang")
+$conn = mysqli_connect ("localhost","root","portal-dagang");
 
 function registrasi($data){
     global $conn;
@@ -11,8 +11,3 @@ function registrasi($data){
     $password2 = mysqli_real_escape_string($conn,$data["password2"]);
     
 }
-
-
-
-
-?>
