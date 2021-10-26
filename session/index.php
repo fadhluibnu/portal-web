@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="style-login.css">
-
     <title>Login - Portal Dagang</title>
 </head>
 
@@ -23,7 +22,19 @@
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
+                            <script>
+                                var login = document.getElementById('nav-home-tab');
+                                login.addEventListener('click', function() {
+                                    document.title = 'Login - Portal Dagang'
+                                })
+                            </script>
                             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#daftar" type="button" role="tab" aria-controls="daftar" aria-selected="false">Daftar</button>
+                            <script>
+                                var login = document.getElementById('nav-profile-tab');
+                                login.addEventListener('click', function() {
+                                    document.title = 'Daftar - Portal Dagang'
+                                })
+                            </script>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
