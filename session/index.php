@@ -1,15 +1,15 @@
 <?php
 require '../function.php';
 
-if (isset($_POST["register"])) {
-    if (registrasi($_POST) > 0) {
-        echo "<script>
-            alert('user baru berhasil ditambahkan');
-             <script>";
-    } else {
-        echo mysqli_error($conn);
-    }
-}
+// if (isset($_POST["register"])) {
+//     if (registrasi($_POST) > 0) {
+//         echo "<script>
+//             alert('user baru berhasil ditambahkan');
+//              <script>";
+//     } else {
+//         echo mysqli_error($conn);
+//     }
+// }
 
 
 ?>
@@ -71,9 +71,13 @@ if (isset($_POST["register"])) {
                             </form>
                         </div>
                         <div class="tab-pane fade" id="daftar" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <form action="" method="POST">
+                            <form action="registrasi.php" method="POST">
                                 <div class="mt-3 mb-3">
                                     <h2 class="h2 text-dark mb-0">Daftar</h2>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" name="username" id="username">
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email address</label>
@@ -83,10 +87,10 @@ if (isset($_POST["register"])) {
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control" name="password" id="password">
                                 </div>
-                                <div class="mb-3">
+                                <!-- <div class="mb-3">
                                     <label for="confirm_pass" class="form-label">Confirm password</label>
                                     <input type="password" class="form-control" name="confirm_pass" id="confirm_pass">
-                                </div>
+                                </div> -->
                                 <button type="submit" name="daftar" class="w-100 pt-3 pb-3 btn btn-primary"><i class="bi bi-box-arrow-in-down me-2"></i>Daftar</button>
                             </form>
                         </div>
