@@ -9,3 +9,25 @@ body {
 .bg-white {
   background-color: white;
 }
+a.nav {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+a.user {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 27px;
+}
+form.form {
+  width: 65%;
+}
+@media (max-width: 991.98px) {
+  form.form {
+    width: 70%;
+  }
+}
+@media (max-width: 575.98px) {
+  form.form {
+    width: 80%;
+  }
+}
