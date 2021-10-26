@@ -61,7 +61,7 @@
                                     <label for="confirm_pass" class="form-label">Confirm password</label>
                                     <input type="password" class="form-control" name="confirm_pass" id="confirm_pass">
                                 </div>
-                                <button type="submit" name="daftar" class="w-100 pt-3 pb-3 btn btn-primary"><i class="bi bi-door-open-fill me-2"></i>Daftar</button>
+                                <button type="submit" name="daftar" class="w-100 pt-3 pb-3 btn btn-primary"><i class="bi bi-box-arrow-in-down me-2"></i>Daftar</button>
                             </form>
                         </div>
                     </div>
