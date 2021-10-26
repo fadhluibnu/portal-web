@@ -1,0 +1,13 @@
+h1.h1 {
+  font-weight: 700;
+  font-size: 4em;
+  line-height: 75px;
+}
+h2.h2 {
+  font-weight: 600;
+  font-size: 1.5em;
+}
+
+.w-100 {
+  width: 100% !important;
+}
