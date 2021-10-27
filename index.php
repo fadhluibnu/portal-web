@@ -21,8 +21,8 @@
                 Portal <span class="text-primary">Dagang</span>
             </a>
             <form class="d-flex me-2 form">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                <input class="form-control me-2" name="input" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-primary" name="cari" type="submit"><i class="bi bi-search"></i></button>
             </form>
             <!-- <form class="container-fluid justify-content-start"> -->
             <!-- <button href="" class="btn bg-light mt-2 mt-sm-0 me-2 user text-dark" type="button"><i class="bi bi-person me-2"></i>Username<i class="ms-2 bi bi-chevron-down"></i></button> -->
