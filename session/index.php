@@ -54,7 +54,7 @@ require '../function.php';
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="nav-home-tab">
-                            <form action="" method="POST">
+                            <form action="login.php" method="POST">
                                 <div class="mt-3 mb-3">
                                     <h2 class="h2 text-dark mb-0">Masuk</h2>
                                 </div>
