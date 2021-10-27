@@ -14,7 +14,7 @@ $password = hash('sha256', $_POST['password']);
 
 $query = mysqli_query($conn, "INSERT INTO user (id_user, username, email, password) VALUES('$id_user', '$username', '$email', '$password')");
 
-if ($query == true) {
+if ($query == 1) {
     header('Location: ../');
     exit;
 } else {
