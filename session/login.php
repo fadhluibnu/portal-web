@@ -1,7 +1,7 @@
 <?php
 include '../function.php';
 
-if  ( isset($_POST["login"])) {
+if (isset($_POST["login"])) {
 
 
     $email = $_POST["email"];
@@ -12,13 +12,11 @@ if  ( isset($_POST["login"])) {
 
     //cek email nya
 
-    if( mysqli_num_rows($result) === 1 ){
+    if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
-		if( password_verify($password, $row["password"]) ) {
-			header("Location: index.php");
-			exit;
+        if (password_verify($password, $row["password"])) {
+            header('Location: ../index.php');
+            exit;
+        }
     }
-
 }
-}
-?>
