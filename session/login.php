@@ -15,11 +15,14 @@ if (isset($_POST["login"])) {
     if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
         if (password_verify($password, $row["password"])) {
-            header("Location: index.php");
+            header("Location: ../");
             exit;
         } else {
-            header('Location: index.php');
-            exit;
+            echo "
+            <script>
+                alert('Gagal Login');
+                window.location.href = '../session/';
+            </script>";
         }
     }
 }

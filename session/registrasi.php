@@ -8,17 +8,22 @@ $id = $fect_gen['maxID'];
 $huruf = 'ID';
 
 $id_user = $huruf . sprintf('%04s', $id);
-$username = htmlspecialchars(addslashes($_POST['username']));
-$email = $_POST['email'];
-$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$username = htmlspecialchars(addslashes($_POST['usernameDaf']));
+$email = $_POST['emailDaf'];
+$password = password_hash($_POST['passwordDaf'], PASSWORD_DEFAULT);
 
+$get_email = mysqli_query($conn, "SELECT * FROM user WHERE email='$email'");
 
-$query = mysqli_query($conn, "INSERT INTO user (id_user, username, email, password) VALUES('$id_user', '$username', '$email', '$password')");
-
-if ($query == 1) {
-    header('Location: ../');
-    exit;
+if (mysqli_num_rows($get_email) > 0) {
+    echo "
+    <script>
+        alert('Email ini telah digunakan');
+        window.location.href = '../session/'
+    </script>";
 } else {
-    header('Location: index.php');
-    exit;
+    $query = mysqli_query($conn, "INSERT INTO user (id_user, username, email, password) VALUES('$id_user', '$username', '$email', '$password')");
+    if ($query == true) {
+        header('Location: ../');
+        exit;
+    }
 }

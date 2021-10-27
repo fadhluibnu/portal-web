@@ -65,16 +65,17 @@ require '../function.php';
                                     <h2 class="h2 text-dark mb-0">Daftar</h2>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" name="username" id="username">
+                                    <label for="usernameDaf" class="form-label">Username</label>
+                                    <input type="text" class="form-control" name="usernameDaf" id="usernameDaf">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" name="email" id="email">
+                                    <label for="emailDaf" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" name="emailDaf" id="emailDaf">
+                                    <div></div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" name="password" id="password">
+                                    <label for="passwordDaf" class="form-label">Password</label>
+                                    <input type="password" class="form-control" name="passwordDaf" id="passwordDaf">
                                 </div>
                                 <button type="submit" name="daftar" class="w-100 pt-3 pb-3 btn btn-primary"><i class="bi bi-box-arrow-in-down me-2"></i>Daftar</button>
                             </form>
