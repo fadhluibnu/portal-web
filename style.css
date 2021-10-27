@@ -45,3 +45,12 @@ button.font .bi::before {
   color: var(--bs-dark) !important;
   font-weight: 600 !important;
 }
+@media (min-width: 768px) {
+  .sticky-md-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 82px;
+    z-index: 1020;
+    height: 40px;
+  }
+}
