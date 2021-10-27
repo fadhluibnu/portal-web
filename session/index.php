@@ -1,17 +1,6 @@
 <?php
 require '../function.php';
 
-// if (isset($_POST["register"])) {
-//     if (registrasi($_POST) > 0) {
-//         echo "<script>
-//             alert('user baru berhasil ditambahkan');
-//              <script>";
-//     } else {
-//         echo mysqli_error($conn);
-//     }
-// }
-
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -67,7 +56,7 @@ require '../function.php';
                                     <input type="password" class="form-control" name="password" id="password">
                                     <a href="" class="nav-link mt-1 p-0">Forgot password?</a>
                                 </div>
-                                <button type="submit" name="daftar" class="w-100 pt-3 pb-3 btn btn-primary"><i class="bi bi-door-open-fill me-2"></i>Login</button>
+                                <button type="submit" name="login" class="w-100 pt-3 pb-3 btn btn-primary"><i class="bi bi-door-open-fill me-2"></i>Login</button>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="daftar" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -87,10 +76,6 @@ require '../function.php';
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control" name="password" id="password">
                                 </div>
-                                <!-- <div class="mb-3">
-                                    <label for="confirm_pass" class="form-label">Confirm password</label>
-                                    <input type="password" class="form-control" name="confirm_pass" id="confirm_pass">
-                                </div> -->
                                 <button type="submit" name="daftar" class="w-100 pt-3 pb-3 btn btn-primary"><i class="bi bi-box-arrow-in-down me-2"></i>Daftar</button>
                             </form>
                         </div>
