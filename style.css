@@ -31,3 +31,17 @@ form.form {
     width: 80%;
   }
 }
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: var(--bs-dark) !important;
+  background-color: rgb(13 28 167 / 9%) !important;
+}
+button.font {
+  color: var(--bs-dark) !important;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+button.font .bi::before {
+  color: var(--bs-dark) !important;
+  font-weight: 600 !important;
+}
