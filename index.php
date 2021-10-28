@@ -29,11 +29,11 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li>
-                        <!-- Button trigger modal -->
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <i class="bi bi-person me-2"></i>Profil
                         </button>
                     </li>
+                    <li><a href="dashboard/" class="btn"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
                     <li><a href="#" class="btn"><i class="bi bi-box-arrow-left me-2"></i>Logout</a></li>
                 </ul>
             </div>
@@ -75,6 +75,8 @@
                         <!-- beranda -->
                         <div class="tab-pane fade show active" id="beranda" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             <div class="row">
+
+                                <!-- lopping mulai dari sini -->
                                 <div class="col bg-light">
                                     <div class="card rounded border-white p-2" style="width: 18rem;">
                                         <div class="img rounded"></div>
@@ -83,13 +85,17 @@
                                             div.img {
                                                 width: 100%;
                                                 height: 165px;
-                                                background-image: url('img/aplikasi-jual-beli-online.jpg');
+                                                background-image: url("<?php //ini buat naruh column gambar di tabel barang ?>");
                                                 background-size: cover;
                                             }
                                         </style>
 
                                         <div class="card-body mt-1 p-0">
-                                            <h5 class="card-title">Aplikasi Toko Online | HTML, CSS, JS</h5>
+                                            <h5 class="card-title">
+                                                <?php
+                                                //ini buat judul_barang tabel barang 
+                                                ?>
+                                            </h5>
                                             <table class="mb-2">
                                                 <tr>
                                                     <td>
@@ -99,48 +105,19 @@
                                                         <span class="harga">:</span>
                                                     </td>
                                                     <td>
-                                                        <div class="text-danger">Rp 1.000.000</div>
+                                                        <div class="text-danger">
+                                                            <?php
+                                                            //ini buat naruh harga di tabel barang
+                                                            ?>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </table>
                                             <div class="d-flex flex-column">
-                                                <a href="" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
-                                                <a href="#" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col bg-light">
-                                    <div class="card rounded border-white p-2" style="width: 18rem;">
-                                        <div class="img rounded"></div>
-                                        <!-- style img -->
-                                        <style>
-                                            div.img {
-                                                width: 100%;
-                                                height: 165px;
-                                                background-image: url('img/aplikasi-jual-beli-online.jpg');
-                                                background-size: cover;
-                                            }
-                                        </style>
-
-                                        <div class="card-body mt-1 p-0">
-                                            <h5 class="card-title">Aplikasi Toko Online | HTML, CSS, JS</h5>
-                                            <table class="mb-2">
-                                                <tr>
-                                                    <td>
-                                                        <p class="harga p-0 m-0">Harga</p>
-                                                    </td>
-                                                    <td>
-                                                        <span class="harga">:</span>
-                                                    </td>
-                                                    <td>
-                                                        <div class="text-danger">Rp 1.000.000</div>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <div class="d-flex flex-column">
-                                                <a href="" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
-                                                <a href="#" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
+                                                <a href="<?php //ini ntar ngarah ke detail tapi blm kebuat 
+                                                            ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
+                                                <a href="<?php //ini buat naruh link di tabel barang 
+                                                            ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
                                             </div>
                                         </div>
                                     </div>
