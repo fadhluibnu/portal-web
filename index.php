@@ -1,6 +1,10 @@
 <?php
 session_start();
+$conn = mysqli_connect("localhost", "root", "", "portal-dagang");
 $user_name = $_SESSION['user_name'];
+$result = mysqli_query($conn,"SELECT * FROM barang");
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -98,7 +102,7 @@ $user_name = $_SESSION['user_name'];
             <div class="col-10 col-md-8 ">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-4 mb-3">
-                        <!-- lopping mulai dari sini -->
+                    <?php while( $row = mysqli_fetch_assoc($result) ): ?>
                         <div class="card rounded border-white p-2">
                             <div class="img rounded"></div>
                             <!-- style img -->
@@ -144,6 +148,7 @@ $user_name = $_SESSION['user_name'];
                                 </div>
                             </div>
                         </div>
+                        <?php  endwhile; ?>
                     </div>
                 </div>
             </div>
