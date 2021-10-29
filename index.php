@@ -1,7 +1,7 @@
 <?php
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "portal-dagang");
 $user_name = $_SESSION['user_name'];
+$conn = mysqli_connect("localhost", "root", "", "portal-dagang");
 $result = mysqli_query($conn, "SELECT * FROM barang");
 
 
@@ -101,26 +101,27 @@ $result = mysqli_query($conn, "SELECT * FROM barang");
             </div>
             <div class="col-10 col-md-8 ">
                 <div class="row">
-                    <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                    <?php
+                    $i = 0;
+                    while ($row = mysqli_fetch_array($result)) : ?>
                         <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <div class="card rounded border-white p-2">
-                                <div class="img rounded"></div>
+                                <div class="img<?= $i ?> rounded"></div>
                                 <!-- style img -->
                                 <style>
-                                    div.img {
+                                    div.img<?= $i ?> {
                                         width: 100%;
                                         height: 165px;
                                         background-size: cover;
                                         background-image:
-                                            url("<?php //ini buat naruh column gambar di tabel barang 
-                                                    ?>");
+                                            url("img/<?php echo $row['gambar'] ?>");
                                     }
                                 </style>
 
                                 <div class="card-body mt-1 p-0">
                                     <h5 class="card-title">
                                         <?php
-                                        //ini buat judul_barang tabel barang 
+                                        echo $row['judul_barang']
                                         ?>
                                     </h5>
                                     <table class="mb-2">
@@ -134,7 +135,7 @@ $result = mysqli_query($conn, "SELECT * FROM barang");
                                             <td>
                                                 <div class="text-danger">
                                                     <?php
-                                                    //ini buat naruh harga di tabel barang
+                                                    $row['harga'];
                                                     ?>
                                                 </div>
                                             </td>
@@ -149,7 +150,9 @@ $result = mysqli_query($conn, "SELECT * FROM barang");
                                 </div>
                             </div>
                         </div>
-                    <?php endwhile; ?>
+                    <?php
+                        $i++;
+                    endwhile; ?>
                 </div>
             </div>
         </div>
