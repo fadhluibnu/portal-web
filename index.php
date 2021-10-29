@@ -4,6 +4,12 @@ $user_name = $_SESSION['user_name'];
 $conn = mysqli_connect("localhost", "root", "", "portal-dagang");
 $result = mysqli_query($conn, "SELECT * FROM barang");
 
+if (isset($_POST["cari"])) {
+    $barang = cari($_POST["keyword"]);
+}
+    
+
+
 
 ?>
 <!doctype html>
@@ -29,7 +35,7 @@ $result = mysqli_query($conn, "SELECT * FROM barang");
                 Portal <span class="text-primary">Dagang</span>
             </a>
             <form class="d-flex me-2 form">
-                <input class="form-control me-2" name="input" type="search" placeholder="Cari barang" aria-label="Search">
+                <input class="form-control me-2" name="keyword" type="search" placeholder="Cari barang" aria-label="Search" autocomplete="off">
                 <button class="btn btn-primary" name="cari" type="submit"><i class="bi bi-search"></i></button>
             </form>
             <div class="dropdown">

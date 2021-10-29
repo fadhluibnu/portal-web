@@ -3,14 +3,20 @@
 //koneksi
 $conn = mysqli_connect("localhost", "root", "", "portal-dagang");
 
-// function registrasi()
-// {
-//     global $conn;
-    // generate id_user
+function query($query){
+    global $conn;
+    $result = mysqli_query($conn,$query);
+    $rows =[];
+    while( $row = mysqli_fetch_assoc($result)){
+        $rows[] = $row
+    }
+    return $rows;
+}
 
-
-    // $username = strtolower(stripslashes($data["username"]));
-    // $password = mysqli_real_escape_string($conn, $data["password"]);
-    // $password2 = mysqli_real_escape_string($conn, $data["password2"]);
-// }
-// registrasi();
+function cari($keyword){
+    query = "SELECT * FROM barang
+            WHERE 
+            kategori LIKE '$keyword%'
+            ";
+    return query ($query);
+}
