@@ -145,54 +145,6 @@ $user_name = $_SESSION['user_name'];
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <!-- lopping mulai dari sini -->
-                        <div class="card rounded border-white p-2">
-                            <div class="img rounded"></div>
-                            <!-- style img -->
-                            <style>
-                                div.img {
-                                    width: 100%;
-                                    height: 165px;
-                                    background-size: cover;
-                                    background-image:
-                                        url("<?php //ini buat naruh column gambar di tabel barang 
-                                                ?>");
-                                }
-                            </style>
-
-                            <div class="card-body mt-1 p-0">
-                                <h5 class="card-title">
-                                    <?php
-                                    //ini buat judul_barang tabel barang 
-                                    ?>
-                                </h5>
-                                <table class="mb-2">
-                                    <tr>
-                                        <td>
-                                            <p class="harga p-0 m-0">Harga</p>
-                                        </td>
-                                        <td>
-                                            <span class="harga">:</span>
-                                        </td>
-                                        <td>
-                                            <div class="text-danger">
-                                                <?php
-                                                //ini buat naruh harga di tabel barang
-                                                ?>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <div class="d-flex flex-column">
-                                    <a href="<?php //ini ntar ngarah ke detail tapi blm kebuat 
-                                                ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
-                                    <a href="<?php //ini buat naruh link di tabel barang 
-                                                ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
