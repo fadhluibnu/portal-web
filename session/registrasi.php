@@ -1,5 +1,6 @@
 <?php
 include '../function.php';
+session_start();
 
 $generate = mysqli_query($conn, "SELECT max(id) AS maxID FROM user");
 $fect_gen = mysqli_fetch_array($generate);
@@ -15,6 +16,7 @@ $password = password_hash($_POST['passwordDaf'], PASSWORD_DEFAULT);
 $get_email = mysqli_query($conn, "SELECT * FROM user WHERE email='$email'");
 
 if (mysqli_num_rows($get_email) > 0) {
+    $_SESSION['user_name'] = $username;
     echo "
     <script>
         alert('Email ini telah digunakan');

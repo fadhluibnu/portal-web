@@ -1,3 +1,7 @@
+<?php
+session_start();
+$user_name = $_SESSION['user_name'];
+?>
 <!doctype html>
 <html lang="en">
 
@@ -25,7 +29,7 @@
                 <button class="btn btn-primary" name="cari" type="submit"><i class="bi bi-search"></i></button>
             </form>
             <div class="dropdown">
-                <button class="btn bg-light mt-2 mt-md-0 me-2 user text-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person me-2"></i>Username
+                <button class="btn bg-light mt-2 mt-md-0 me-2 user text-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person me-2"></i><?php echo $user_name; ?>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li>
@@ -60,76 +64,136 @@
     <div class="mt-5 pb-5">
     </div>
     <div class="container-fluid pt-5 pt-md-0">
-        <div class="row" style="height: 700px;">
+        <div class="row justify-content-center" style="height: 700px;">
             <div class="col col-md-3 fixed-bottom sticky-md-top">
                 <div class="bg-white p-3 rounded">
-                    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <button class="text-start font nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#beranda" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="bi bi-house-door me-2"></i>Beranda</button>
-                        <button class="text-start font nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#kategori" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"><i class="bi bi-list me-2"></i>Kategori</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col col-md-9 ">
-                <div class="d-flex align-items-start">
-                    <div class="tab-content" id="v-pills-tabContent">
-                        <!-- beranda -->
-                        <div class="tab-pane fade show active" id="beranda" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                            <div class="row">
-
-                                <!-- lopping mulai dari sini -->
-                                <div class="col bg-light">
-                                    <div class="card rounded border-white p-2" style="width: 18rem;">
-                                        <div class="img rounded"></div>
-                                        <!-- style img -->
-                                        <style>
-                                            div.img {
-                                                width: 100%;
-                                                height: 165px;
-                                                background-image: url("<?php //ini buat naruh column gambar di tabel barang ?>");
-                                                background-size: cover;
-                                            }
-                                        </style>
-
-                                        <div class="card-body mt-1 p-0">
-                                            <h5 class="card-title">
-                                                <?php
-                                                //ini buat judul_barang tabel barang 
-                                                ?>
-                                            </h5>
-                                            <table class="mb-2">
-                                                <tr>
-                                                    <td>
-                                                        <p class="harga p-0 m-0">Harga</p>
-                                                    </td>
-                                                    <td>
-                                                        <span class="harga">:</span>
-                                                    </td>
-                                                    <td>
-                                                        <div class="text-danger">
-                                                            <?php
-                                                            //ini buat naruh harga di tabel barang
-                                                            ?>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <div class="d-flex flex-column">
-                                                <a href="<?php //ini ntar ngarah ke detail tapi blm kebuat 
-                                                            ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
-                                                <a href="<?php //ini buat naruh link di tabel barang 
-                                                            ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
-                                            </div>
-                                        </div>
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a href="" class="text-start font btn btn-primary"><i class="bi bi-house-door me-2"></i>Beranda</a>
+                        <div class="mt-2 accordion" id="accordionExample">
+                            <div class="accordion-item border-0">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="ps-3 accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        <i class="bi bi-list-nested me-2"></i>Kategori
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div class="pt-1 ps-1 accordion-body">
+                                        <ul class="ps-2" type="none">
+                                            <li class="nav-item rounded hover mt-2">
+                                                <a class="nav-link text-dark" href="#"><i class="bi bi-x-diamond me-2"></i>Pakaian</a>
+                                            </li>
+                                            <li class="nav-item rounded hover mt-2">
+                                                <a class="nav-link text-dark" href="#"><i class="bi bi-x-diamond me-2"></i>Elektronik</a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- kategori -->
-                        <div class="tab-pane fade" id="kategori" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+                        <!-- <button class="text-start font nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#beranda" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="bi bi-house-door me-2"></i>Beranda</button>
+                        <button type="button" class="text-start font nav-link active">...</button> -->
                     </div>
                 </div>
+            </div>
+            <div class="col-10 col-md-8 ">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <!-- lopping mulai dari sini -->
+                        <div class="card rounded border-white p-2">
+                            <div class="img rounded"></div>
+                            <!-- style img -->
+                            <style>
+                                div.img {
+                                    width: 100%;
+                                    height: 165px;
+                                    background-size: cover;
+                                    background-image:
+                                        url("<?php //ini buat naruh column gambar di tabel barang 
+                                                ?>");
+                                }
+                            </style>
 
+                            <div class="card-body mt-1 p-0">
+                                <h5 class="card-title">
+                                    <?php
+                                    //ini buat judul_barang tabel barang 
+                                    ?>
+                                </h5>
+                                <table class="mb-2">
+                                    <tr>
+                                        <td>
+                                            <p class="harga p-0 m-0">Harga</p>
+                                        </td>
+                                        <td>
+                                            <span class="harga">:</span>
+                                        </td>
+                                        <td>
+                                            <div class="text-danger">
+                                                <?php
+                                                //ini buat naruh harga di tabel barang
+                                                ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="d-flex flex-column">
+                                    <a href="<?php //ini ntar ngarah ke detail tapi blm kebuat 
+                                                ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
+                                    <a href="<?php //ini buat naruh link di tabel barang 
+                                                ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <!-- lopping mulai dari sini -->
+                        <div class="card rounded border-white p-2">
+                            <div class="img rounded"></div>
+                            <!-- style img -->
+                            <style>
+                                div.img {
+                                    width: 100%;
+                                    height: 165px;
+                                    background-size: cover;
+                                    background-image:
+                                        url("<?php //ini buat naruh column gambar di tabel barang 
+                                                ?>");
+                                }
+                            </style>
+
+                            <div class="card-body mt-1 p-0">
+                                <h5 class="card-title">
+                                    <?php
+                                    //ini buat judul_barang tabel barang 
+                                    ?>
+                                </h5>
+                                <table class="mb-2">
+                                    <tr>
+                                        <td>
+                                            <p class="harga p-0 m-0">Harga</p>
+                                        </td>
+                                        <td>
+                                            <span class="harga">:</span>
+                                        </td>
+                                        <td>
+                                            <div class="text-danger">
+                                                <?php
+                                                //ini buat naruh harga di tabel barang
+                                                ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="d-flex flex-column">
+                                    <a href="<?php //ini ntar ngarah ke detail tapi blm kebuat 
+                                                ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
+                                    <a href="<?php //ini buat naruh link di tabel barang 
+                                                ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
