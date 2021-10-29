@@ -3,7 +3,7 @@ session_start();
 $user_name = $_SESSION['user_name'];
 $conn = mysqli_connect("localhost", "root", "", "portal-dagang");
 $result = mysqli_query($conn, "SELECT * FROM barang");
-
+$kategori = $_GET['category'];
 
 ?>
 <!doctype html>
@@ -16,10 +16,11 @@ $result = mysqli_query($conn, "SELECT * FROM barang");
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../session/style-login.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
 
-    <title>Portal Dagang</title>
+    <title>Category <?= $kategori ?> - Portal Dagang</title>
 </head>
 
 <body class="bg-light">
@@ -72,22 +73,22 @@ $result = mysqli_query($conn, "SELECT * FROM barang");
             <div class="col col-md-3 fixed-bottom sticky-md-top">
                 <div class="bg-white p-3 rounded">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a href="" class="text-start font btn btn-primary"><i class="bi bi-house-door me-2"></i>Beranda</a>
+                        <a href="../" class="text-start text-dark font-cate btn"><i class="bi bi-house-door me-2"></i>Beranda</a>
                         <div class="mt-2 accordion" id="accordionExample">
                             <div class="accordion-item border-0">
                                 <h2 class="accordion-header" id="headingOne">
-                                    <button class="ps-3 accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <button class="ps-3 accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         <i class="bi bi-list-nested me-2"></i>Kategori
                                     </button>
                                 </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div id="collapseOne" class="accordion-collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <div class="pt-1 ps-1 accordion-body">
                                         <ul class="ps-2" type="none">
                                             <li class="nav-item rounded hover mt-2">
-                                                <a class="nav-link text-dark" href="category/?category=pakaian"><i class="bi bi-x-diamond me-2"></i>Pakaian</a>
+                                                <a href="../category/?category=Pakaian" class="w-100 text-start btn"><i class="bi bi-x-diamond me-2"></i>Pakaian</a>
                                             </li>
                                             <li class="nav-item rounded hover mt-2">
-                                                <a class="nav-link text-dark" href="category/?category=elektronik"><i class="bi bi-x-diamond me-2"></i>Elektronik</a>
+                                                <a href="../category/?category=Elektronik" class="w-100 text-start btn"><i class="bi bi-x-diamond me-2"></i>Elektronik</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -101,6 +102,7 @@ $result = mysqli_query($conn, "SELECT * FROM barang");
             </div>
             <div class="col-10 col-md-8 ">
                 <div class="row">
+                    <h2 class="h2 mb-3">Category <?= $kategori ?></h2>
                     <?php
                     $i = 0;
                     while ($row = mysqli_fetch_array($result)) : ?>
@@ -114,7 +116,7 @@ $result = mysqli_query($conn, "SELECT * FROM barang");
                                         height: 165px;
                                         background-size: cover;
                                         background-image:
-                                            url("img/<?php echo $row['gambar'] ?>");
+                                            url("../img/<?php echo $row['gambar'] ?>");
                                     }
                                 </style>
 

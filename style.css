@@ -45,6 +45,15 @@ form.form {
   color: var(--bs-white) !important;
   font-weight: 500 !important;
 }
+.font-cate {
+  /* color: var(--bs-white) !important; */
+  font-size: 1.1em;
+  font-weight: 400;
+}
+.font-cate .bi::before {
+  /* color: var(--bs-white) !important; */
+  font-weight: 500 !important;
+}
 .accordion-button:not(.collapsed) {
   color: var(--bs-primary);
   background-color: #e7f1ff;
