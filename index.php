@@ -65,7 +65,7 @@ $result = mysqli_query($conn, "SELECT * FROM barang");
             </div>
         </div>
     </div>
-    <div class="mt-5 pb-3">
+    <div class="mt-5 pb-5">
     </div>
     <div class="container-fluid pt-5 pt-md-0">
         <div class="row justify-content-center" style="height: 700px;">
