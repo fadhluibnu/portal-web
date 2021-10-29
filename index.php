@@ -135,7 +135,7 @@ $result = mysqli_query($conn, "SELECT * FROM barang");
                                             <td>
                                                 <div class="text-danger">
                                                     <?php
-                                                    $row['harga'];
+                                                    echo $row['harga'];
                                                     ?>
                                                 </div>
                                             </td>
