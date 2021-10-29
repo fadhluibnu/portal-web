@@ -1,13 +1,14 @@
 <?php
 session_start();
+require 'function.php';
 $user_name = $_SESSION['user_name'];
 $conn = mysqli_connect("localhost", "root", "", "portal-dagang");
 $result = mysqli_query($conn, "SELECT * FROM barang");
 
 if (isset($_POST["cari"])) {
-    $barang = cari($_POST["keyword"]);
+    $result = cari($_POST["keyword"]);
 }
-    
+
 
 
 
@@ -34,7 +35,7 @@ if (isset($_POST["cari"])) {
             <a href="" class="navbar-brand d-none d-lg-block nav text-dark">
                 Portal <span class="text-primary">Dagang</span>
             </a>
-            <form class="d-flex me-2 form">
+            <form method="POST" class="d-flex me-2 form">
                 <input class="form-control me-2" name="keyword" type="search" placeholder="Cari barang" aria-label="Search" autocomplete="off">
                 <button class="btn btn-primary" name="cari" type="submit"><i class="bi bi-search"></i></button>
             </form>
@@ -150,7 +151,7 @@ if (isset($_POST["cari"])) {
                                     <div class="d-flex flex-column">
                                         <a href="<?php //ini ntar ngarah ke detail tapi blm kebuat 
                                                     ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
-                                        <a href="<?php echo $row['link'] 
+                                        <a href="<?php echo $row['link']
                                                     ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
                                     </div>
                                 </div>
