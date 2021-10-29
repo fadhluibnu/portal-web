@@ -8,10 +8,6 @@ $result = mysqli_query($conn, "SELECT * FROM barang");
 if (isset($_POST["cari"])) {
     $result = cari($_POST["keyword"]);
 }
-
-
-
-
 ?>
 <!doctype html>
 <html lang="en">

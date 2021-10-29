@@ -72,3 +72,14 @@ li.nav-item.rounded.hover:hover {
     height: 40px;
   }
 }
+
+.navbar-nav .produk {
+}
+.navbar-nav .produk h4.h4 {
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+.navbar-nav .produk h5.h5 {
+  font-size: 1rem;
+  font-weight: 600;
+}
