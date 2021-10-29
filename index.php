@@ -2,7 +2,7 @@
 session_start();
 $conn = mysqli_connect("localhost", "root", "", "portal-dagang");
 $user_name = $_SESSION['user_name'];
-$result = mysqli_query($conn,"SELECT * FROM barang");
+$result = mysqli_query($conn, "SELECT * FROM barang");
 
 
 ?>
@@ -101,55 +101,55 @@ $result = mysqli_query($conn,"SELECT * FROM barang");
             </div>
             <div class="col-10 col-md-8 ">
                 <div class="row">
-                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                    <?php while( $row = mysqli_fetch_assoc($result) ): ?>
-                        <div class="card rounded border-white p-2">
-                            <div class="img rounded"></div>
-                            <!-- style img -->
-                            <style>
-                                div.img {
-                                    width: 100%;
-                                    height: 165px;
-                                    background-size: cover;
-                                    background-image:
-                                        url("<?php //ini buat naruh column gambar di tabel barang 
-                                                ?>");
-                                }
-                            </style>
+                    <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                        <div class="col-12 col-md-6 col-lg-4 mb-3">
+                            <div class="card rounded border-white p-2">
+                                <div class="img rounded"></div>
+                                <!-- style img -->
+                                <style>
+                                    div.img {
+                                        width: 100%;
+                                        height: 165px;
+                                        background-size: cover;
+                                        background-image:
+                                            url("<?php //ini buat naruh column gambar di tabel barang 
+                                                    ?>");
+                                    }
+                                </style>
 
-                            <div class="card-body mt-1 p-0">
-                                <h5 class="card-title">
-                                    <?php
-                                    //ini buat judul_barang tabel barang 
-                                    ?>
-                                </h5>
-                                <table class="mb-2">
-                                    <tr>
-                                        <td>
-                                            <p class="harga p-0 m-0">Harga</p>
-                                        </td>
-                                        <td>
-                                            <span class="harga">:</span>
-                                        </td>
-                                        <td>
-                                            <div class="text-danger">
-                                                <?php
-                                                //ini buat naruh harga di tabel barang
-                                                ?>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <div class="d-flex flex-column">
-                                    <a href="<?php //ini ntar ngarah ke detail tapi blm kebuat 
-                                                ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
-                                    <a href="<?php //ini buat naruh link di tabel barang 
-                                                ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
+                                <div class="card-body mt-1 p-0">
+                                    <h5 class="card-title">
+                                        <?php
+                                        //ini buat judul_barang tabel barang 
+                                        ?>
+                                    </h5>
+                                    <table class="mb-2">
+                                        <tr>
+                                            <td>
+                                                <p class="harga p-0 m-0">Harga</p>
+                                            </td>
+                                            <td>
+                                                <span class="harga">:</span>
+                                            </td>
+                                            <td>
+                                                <div class="text-danger">
+                                                    <?php
+                                                    //ini buat naruh harga di tabel barang
+                                                    ?>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="d-flex flex-column">
+                                        <a href="<?php //ini ntar ngarah ke detail tapi blm kebuat 
+                                                    ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
+                                        <a href="<?php //ini buat naruh link di tabel barang 
+                                                    ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <?php  endwhile; ?>
-                    </div>
+                    <?php endwhile; ?>
                 </div>
             </div>
         </div>
