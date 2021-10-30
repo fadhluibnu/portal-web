@@ -1,7 +1,32 @@
 <?php
 session_start();
+$conn = mysqli_connect("localhost", "root", "", "portal-dagang");
 $user_name = $_SESSION['user_name'];
 $id_user = $_SESSION['id_user'];
+if ( isset($_POST["submit"])){
+
+    //ngambil datanya
+
+    $judul_barang = $_POST["judul_barang"];
+    $harga = $_POST["harga"];
+    $link = $_POST["link"];
+    $gambar = $_POST["gambar"];
+    $kategori = $_POST["kategori"];
+    $deskripsi_barang = $_POST["deskripsi_barang"];
+    
+    
+
+
+    //query
+    $query = " INSERT INTO barang
+                VALUES
+                ('','$id_user','$judul_barang','$deskripsi_barang','$gambar','$kategori','$harga','$link')";
+    mysqli_query($conn,$query);
+
+
+
+
+}
 ?>
 <!doctype html>
 <html lang="en">
