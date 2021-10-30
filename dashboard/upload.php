@@ -1,16 +1,10 @@
 <?php
 session_start();
-<<<<<<< HEAD
-if (!isset($_SESSION['masuk'])) {
-    header("Location: ../session/");
-    exit;
-}
-=======
 $conn = mysqli_connect("localhost", "root", "", "portal-dagang");
->>>>>>> d1c3f0846430e0939029797a135ca8b6452218c6
 $user_name = $_SESSION['user_name'];
 $id_user = $_SESSION['id_user'];
-if ( isset($_POST["submit"])){
+
+if (isset($_POST["submit"])) {
 
     //ngambil datanya
 
@@ -19,20 +13,16 @@ if ( isset($_POST["submit"])){
     $link = $_POST["link"];
     $gambar = $_POST["gambar"];
     $kategori = $_POST["kategori"];
-    $deskripsi_barang = $_POST["deskripsi_barang"];
-    
-    
+    $deskripsi_barang = $_POST["deskripsi"];
+
+
 
 
     //query
     $query = " INSERT INTO barang
                 VALUES
                 ('','$id_user','$judul_barang','$deskripsi_barang','$gambar','$kategori','$harga','$link')";
-    mysqli_query($conn,$query);
-
-
-
-
+    mysqli_query($conn, $query);
 }
 ?>
 <!doctype html>
@@ -100,7 +90,7 @@ if ( isset($_POST["submit"])){
                         <label for="wa" class="form-label">Nomor WhatsApp</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon3">+62</span>
-                            <input type="tel" class="form-control" id="wa" name="wa" placeholder="Cth: 852123">
+                            <input type="tel" class="form-control" id="wa" name="link" placeholder="Cth: 852123">
                         </div>
                     </div>
                     <div class="mb-3">
@@ -111,7 +101,7 @@ if ( isset($_POST["submit"])){
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Kategori</label>
-                        <select class="form-select" aria-label="Default select example">
+                        <select name="kategori" class="form-select" aria-label="Default select example">
                             <option selected>Open this select menu</option>
                             <option value="Pakaian">Pakaian</option>
                             <option value="Elektronik">Elektronik</option>
