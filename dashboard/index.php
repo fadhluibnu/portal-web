@@ -2,6 +2,10 @@
 session_start();
 $user_name = $_SESSION['user_name'];
 $id_user = $_SESSION['id_user'];
+$conn = mysqli_connect("localhost", "root", "", "portal-dagang");
+
+
+$result = mysqli_query($conn,"SELECT * FROM barang");
 ?>
 <!doctype html>
 <html lang="en">
@@ -34,7 +38,7 @@ $id_user = $_SESSION['id_user'];
                     <a class="nav-link" href="upload.php">Tambah Produk</a>
                 </div>
             </div>
-            <form class="d-flex">
+            <form method="POST" class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
@@ -60,22 +64,17 @@ $id_user = $_SESSION['id_user'];
                 </tr>
             </thead>
             <tbody>
+                 <?php while( $row = mysqli_fetch_assoc($result) ): ?>
                 <tr>
                     <th scope="row">1</th>
                     <td>
-                        <?php
-                        //ini judul produk 
-                        ?>
+                    <?= $row ["judul_barang"] ?>
                     </td>
                     <td>
-                        <?php
-                        //ini kategori 
-                        ?>
+                    <?= $row ["kategori"] ?>
                     </td>
                     <td>
-                        <?php
-                        //ini Harga
-                        ?>
+                    <?=$row ["harga"] ?>
                     </td>
                     <td>
                         <a class="btn btn-warning text-white" href="edit.php?id=
@@ -101,6 +100,7 @@ $id_user = $_SESSION['id_user'];
                         </a>
                     </td>
                 </tr>
+                <?php  endwhile; ?>
             </tbody>
 
         </table>
