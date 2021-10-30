@@ -1,6 +1,6 @@
 <?php
-include '../function.php';
 session_start();
+include '../function.php';
 
 $generate = mysqli_query($conn, "SELECT max(id) AS maxID FROM user");
 $fect_gen = mysqli_fetch_array($generate);
@@ -24,6 +24,7 @@ if (mysqli_num_rows($get_email) > 0) {
 } else {
     $_SESSION['user_name'] = $username;
     $_SESSION['id_user'] = $id_user;
+    $_SESSION['masuk'] = true;
     $query = mysqli_query($conn, "INSERT INTO user (id_user, username, email, password) VALUES('$id_user', '$username', '$email', '$password')");
     if ($query == true) {
         header('Location: ../');

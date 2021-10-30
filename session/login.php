@@ -1,6 +1,6 @@
 <?php
-include '../function.php';
 session_start();
+include '../function.php';
 
 if (isset($_POST["login"])) {
 
@@ -18,6 +18,7 @@ if (isset($_POST["login"])) {
         if (password_verify($password, $row['password'])) {
             $_SESSION['user_name'] = $row['username'];
             $_SESSION['id_user'] = $row['id_user'];
+            $_SESSION['masuk'] = true;
             header('Location: ../');
             exit;
         } else {

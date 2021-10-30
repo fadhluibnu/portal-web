@@ -72,6 +72,12 @@ $id_user = $_SESSION['id_user'];
                         </div>
                     </div>
                     <div class="mb-3">
+                        <label for="inputGroupFile01" class="form-label">Gambar <em>(thumbnail)</em></label>
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="inputGroupFile01" name="gambar">
+                        </div>
+                    </div>
+                    <div class="mb-3">
                         <label for="" class="form-label">Kategori</label>
                         <select class="form-select" aria-label="Default select example">
                             <option selected>Open this select menu</option>

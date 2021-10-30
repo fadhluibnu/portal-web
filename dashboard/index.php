@@ -5,7 +5,7 @@ $id_user = $_SESSION['id_user'];
 $conn = mysqli_connect("localhost", "root", "", "portal-dagang");
 
 
-$result = mysqli_query($conn,"SELECT * FROM barang");
+$result = mysqli_query($conn, "SELECT * FROM barang");
 ?>
 <!doctype html>
 <html lang="en">
@@ -64,20 +64,20 @@ $result = mysqli_query($conn,"SELECT * FROM barang");
                 </tr>
             </thead>
             <tbody>
-                 <?php while( $row = mysqli_fetch_assoc($result) ): ?>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>
-                    <?= $row ["judul_barang"] ?>
-                    </td>
-                    <td>
-                    <?= $row ["kategori"] ?>
-                    </td>
-                    <td>
-                    <?=$row ["harga"] ?>
-                    </td>
-                    <td>
-                        <a class="btn btn-warning text-white" href="edit.php?id=
+                <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>
+                            <?= $row["judul_barang"] ?>
+                        </td>
+                        <td>
+                            <?= $row["kategori"] ?>
+                        </td>
+                        <td>
+                            <?= $row["harga"] ?>
+                        </td>
+                        <td>
+                            <a class="btn btn-warning text-white" href="edit.php?id=
                         <?php
                         //ini id produk 
                         ?>&
@@ -86,9 +86,9 @@ $result = mysqli_query($conn,"SELECT * FROM barang");
                         // ini id_user
                         ?>
                         "><i class=" bi bi-pencil-square me-2"></i>Edit
-                        </a>
+                            </a>
 
-                        <a class="btn btn-danger" href="delete.php?id=
+                            <a class="btn btn-danger" href="delete.php?id=
                         <?php
                         //ini id produk 
                         ?>&
@@ -97,10 +97,10 @@ $result = mysqli_query($conn,"SELECT * FROM barang");
                         // ini id_user
                         ?>
                         "><i class="bi bi-trash2-fill me-2"></i>Hapus
-                        </a>
-                    </td>
-                </tr>
-                <?php  endwhile; ?>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
             </tbody>
 
         </table>

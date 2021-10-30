@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['masuk'])) {
+    header('Location: ../session/');
+    exit;
+}
 $user_name = $_SESSION['user_name'];
 $conn = mysqli_connect("localhost", "root", "", "portal-dagang");
 $result = mysqli_query($conn, "SELECT * FROM barang");
