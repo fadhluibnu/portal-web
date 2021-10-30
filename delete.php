@@ -41,7 +41,7 @@ $result = mysqli_query($conn,"SELECT * FROM barang");
         <td><?= $row ["deskripsi_barang"]?></td>
         <td><?= $row ["kategori"] ?></td>
         <td><?= $row ["harga"] ?></td>
-        <td><a href="https://api.whatsapp.com/send?phone=+6281326237199">link</a></td>
+        <td><a href=<?=$row["link"] ?>>link</a></td>
     </tr>
     <?php  endwhile; ?>
 
