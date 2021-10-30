@@ -30,8 +30,8 @@ $id_user = $_SESSION['id_user'];
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="">Semua Produk</a>
-                    <a class="nav-link active" aria-current="page" href="../dashboard/">Tambah Produk</a>
+                    <a class="nav-link" href="../dashboard/">Semua Produk</a>
+                    <a class="nav-link active" aria-current="page" href="">Tambah Produk</a>
                 </div>
             </div>
             <form class="d-flex">
