@@ -1,11 +1,16 @@
 <?php
 session_start();
+if (!isset($_SESSION['masuk'])) {
+    header("Location: ../session/");
+    exit;
+}
+include '../function.php';
 $user_name = $_SESSION['user_name'];
 $id_user = $_SESSION['id_user'];
 $conn = mysqli_connect("localhost", "root", "", "portal-dagang");
 
 
-$result = mysqli_query($conn, "SELECT * FROM barang");
+$result = mysqli_query($conn, "SELECT * FROM barang WHERE id_user='$id_user'");
 ?>
 <!doctype html>
 <html lang="en">
@@ -47,7 +52,7 @@ $result = mysqli_query($conn, "SELECT * FROM barang");
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="z-index: 9999;">
                     <li><a href="../" class="btn"><i class="bi bi-speedometer2 me-2"></i>Beranda</a></li>
-                    <li><a href="#" class="btn"><i class="bi bi-box-arrow-left me-2"></i>Logout</a></li>
+                    <li><a href="../logout.php" class="btn"><i class="bi bi-box-arrow-left me-2"></i>Logout</a></li>
                 </ul>
             </div>
         </div>

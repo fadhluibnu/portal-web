@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['masuk'])) {
+    header("Location: session/");
+    exit;
+}
 require 'function.php';
 $user_name = $_SESSION['user_name'];
 $conn = mysqli_connect("localhost", "root", "", "portal-dagang");
@@ -39,35 +43,12 @@ if (isset($_POST["cari"])) {
                 <button class="btn bg-light mt-2 mt-md-0 me-2 user text-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person me-2"></i><?php echo $user_name; ?>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li>
-                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="bi bi-person me-2"></i>Profil
-                        </button>
-                    </li>
                     <li><a href="dashboard/" class="btn"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
-                    <li><a href="#" class="btn"><i class="bi bi-box-arrow-left me-2"></i>Logout</a></li>
+                    <li><a href="logout.php" class="btn"><i class="bi bi-box-arrow-left me-2"></i>Logout</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Profil</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="mt-5 pb-5">
     </div>
     <div class="container-fluid pt-5 pt-md-0">
@@ -87,18 +68,25 @@ if (isset($_POST["cari"])) {
                                     <div class="pt-1 ps-1 accordion-body">
                                         <ul class="ps-2" type="none">
                                             <li class="nav-item rounded hover mt-2">
-                                                <a class="nav-link text-dark" href="category/?category=pakaian"><i class="bi bi-x-diamond me-2"></i>Pakaian</a>
+                                                <a class="nav-link text-dark" href="category/?category=Pakaian"><i class="bi bi-x-diamond me-2"></i>Pakaian</a>
                                             </li>
                                             <li class="nav-item rounded hover mt-2">
-                                                <a class="nav-link text-dark" href="category/?category=elektronik"><i class="bi bi-x-diamond me-2"></i>Elektronik</a>
+                                                <a class="nav-link text-dark" href="category/?category=Elektronik"><i class="bi bi-x-diamond me-2"></i>Elektronik</a>
+                                            </li>
+                                            <li class="nav-item rounded hover mt-2">
+                                                <a class="nav-link text-dark" href="category/?category=Jasa"><i class="bi bi-x-diamond me-2"></i>Jasa</a>
+                                            </li>
+                                            <li class="nav-item rounded hover mt-2">
+                                                <a class="nav-link text-dark" href="category/?category=Sepatu"><i class="bi bi-x-diamond me-2"></i>Sepatu</a>
+                                            </li>
+                                            <li class="nav-item rounded hover mt-2">
+                                                <a class="nav-link text-dark" href="category/?category=Perlengkapan Rumah"><i class="bi bi-x-diamond me-2"></i>Perlengkapan Rumah</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- <button class="text-start font nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#beranda" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="bi bi-house-door me-2"></i>Beranda</button>
-                        <button type="button" class="text-start font nav-link active">...</button> -->
                     </div>
                 </div>
             </div>

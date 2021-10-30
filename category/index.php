@@ -8,7 +8,9 @@ $user_name = $_SESSION['user_name'];
 $conn = mysqli_connect("localhost", "root", "", "portal-dagang");
 $result = mysqli_query($conn, "SELECT * FROM barang");
 $kategori = $_GET['category'];
-
+if (isset($_GET['category'])) {
+    $result = mysqli_query($conn, "SELECT * FROM barang WHERE kategori LIKE '%$kategori%'");
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -47,7 +49,7 @@ $kategori = $_GET['category'];
                         </button>
                     </li>
                     <li><a href="dashboard/" class="btn"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
-                    <li><a href="#" class="btn"><i class="bi bi-box-arrow-left me-2"></i>Logout</a></li>
+                    <li><a href="../logout.php" class="btn"><i class="bi bi-box-arrow-left me-2"></i>Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -94,6 +96,15 @@ $kategori = $_GET['category'];
                                             <li class="nav-item rounded hover mt-2">
                                                 <a href="../category/?category=Elektronik" class="w-100 text-start btn"><i class="bi bi-x-diamond me-2"></i>Elektronik</a>
                                             </li>
+                                            <li class="nav-item rounded hover mt-2">
+                                                <a class="nav-link text-dark" href="../category/?category=Jasa"><i class="bi bi-x-diamond me-2"></i>Jasa</a>
+                                            </li>
+                                            <li class="nav-item rounded hover mt-2">
+                                                <a class="nav-link text-dark" href="../category/?category=Sepatu"><i class="bi bi-x-diamond me-2"></i>Sepatu</a>
+                                            </li>
+                                            <li class="nav-item rounded hover mt-2">
+                                                <a class="nav-link text-dark" href="../category/?category=Perlengkapan Rumah"><i class="bi bi-x-diamond me-2"></i>Perlengkapan Rumah</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -106,59 +117,71 @@ $kategori = $_GET['category'];
             </div>
             <div class="col-10 col-md-8 ">
                 <div class="row">
-                    <h2 class="h2 mb-3">Category <?= $kategori ?></h2>
                     <?php
                     $i = 0;
-                    while ($row = mysqli_fetch_array($result)) : ?>
-                        <div class="col-12 col-md-6 col-lg-4 mb-3">
-                            <div class="card rounded border-white p-2">
-                                <div class="img<?= $i ?> rounded"></div>
-                                <!-- style img -->
-                                <style>
-                                    div.img<?= $i ?> {
-                                        width: 100%;
-                                        height: 165px;
-                                        background-size: cover;
-                                        background-image:
-                                            url("../img/<?php echo $row['gambar'] ?>");
-                                    }
-                                </style>
+                    if (mysqli_num_rows($result) > 0) {
+                    ?>
+                        <div class="mt-3 alert bg-success alert-dismissible fade show d-flex align-items-center justify-content-between" role="alert">
+                            <span class="text-light">Category <strong><?= $kategori; ?></strong></span>
+                            <button type="button" class="btn" data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-x-lg text-light"></i></button>
+                        </div>
+                        <?php
+                        while ($row = mysqli_fetch_array($result)) : ?>
+                            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                <div class="card rounded border-white p-2">
+                                    <div class="img<?= $i ?> rounded"></div>
+                                    <!-- style img -->
+                                    <style>
+                                        div.img<?= $i ?> {
+                                            width: 100%;
+                                            height: 165px;
+                                            background-size: cover;
+                                            background-image:
+                                                url("../img/<?php echo $row['gambar'] ?>");
+                                        }
+                                    </style>
 
-                                <div class="card-body mt-1 p-0">
-                                    <h5 class="card-title">
-                                        <?php
-                                        echo $row['judul_barang']
-                                        ?>
-                                    </h5>
-                                    <table class="mb-2">
-                                        <tr>
-                                            <td>
-                                                <p class="harga p-0 m-0">Harga</p>
-                                            </td>
-                                            <td>
-                                                <span class="harga">:</span>
-                                            </td>
-                                            <td>
-                                                <div class="text-danger">
-                                                    <?php
-                                                    $row['harga'];
-                                                    ?>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <div class="d-flex flex-column">
-                                        <a href="<?php //ini ntar ngarah ke detail tapi blm kebuat 
-                                                    ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
-                                        <a href="<?php //ini buat naruh link di tabel barang 
-                                                    ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
+                                    <div class="card-body mt-1 p-0">
+                                        <h5 class="card-title">
+                                            <?php
+                                            echo $row['judul_barang']
+                                            ?>
+                                        </h5>
+                                        <table class="mb-2">
+                                            <tr>
+                                                <td>
+                                                    <p class="harga p-0 m-0">Harga</p>
+                                                </td>
+                                                <td>
+                                                    <span class="harga">:</span>
+                                                </td>
+                                                <td>
+                                                    <div class="text-danger">
+                                                        <?php
+                                                        $row['harga'];
+                                                        ?>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div class="d-flex flex-column">
+                                            <a href="<?php //ini ntar ngarah ke detail tapi blm kebuat 
+                                                        ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
+                                            <a href="<?php //ini buat naruh link di tabel barang 
+                                                        ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        <?php
+                            $i++;
+                        endwhile;
+                    } else { ?>
+                        <div class="mt-3 alert bg-danger alert-dismissible fade show d-flex align-items-center justify-content-between" role="alert">
+                            <span class="text-light">Category <strong><?= $kategori; ?></strong> tidak ditemukan</span>
+                            <button type="button" class="btn" data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-x-lg text-light"></i></button>
                         </div>
-                    <?php
-                        $i++;
-                    endwhile; ?>
+                    <?php } ?>
                 </div>
             </div>
         </div>
