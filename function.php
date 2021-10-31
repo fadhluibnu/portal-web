@@ -7,9 +7,10 @@ function query($query)
 {
     global $conn;
     $result = mysqli_query($conn, $query);
-    $rows = [];
+    // $rows = [];
     while ($row = mysqli_fetch_assoc($result)) {
-        $rows[] = $row;
+        // $rows[] = $row;
+        $rows = $row;
     }
     return $rows;
 }
@@ -95,4 +96,32 @@ function upload()
     // lolos pengecekan
     move_uploaded_file($tmp_name, '../image/' . $namaFileBaru);
     return $namaFileBaru;
+}
+
+function ubah($data)
+{
+
+    global $conn;
+
+    $id = $data["id"];
+    $judul_barang = htmlspecialchars($data["judul_barang"]);
+    $harga = htmlspecialchars($data["harga"]);
+    $link = htmlspecialchars($data["link"]);
+    $gambar = htmlspecialchars($data["gambar"]);
+    $kategori = htmlspecialchars($data["kategori"]);
+    $deskripsi_barang = htmlspecialchars($data["deskripsi"]);
+
+    $sql = "UPDATE barang SET 
+                        judul_barang = '$judul_barang',
+                        harga = '$harga',
+                        link = '$link',
+                        gambar = $gambar,
+                        kategori = '$kategori',
+                        deskripsi_barang = '$deskripsi_barang'
+                    WHERE 
+                        id = $id
+                        ";
+    mysqli_query($conn, $sql);
+
+    return mysqli_affected_rows($conn);
 }

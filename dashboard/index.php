@@ -79,26 +79,10 @@ $result = mysqli_query($conn, "SELECT * FROM barang WHERE id_user='$id_user'");
                             <?= $row["harga"] ?>
                         </td>
                         <td>
-                            <a class="btn btn-warning text-white" href="edit.php?id=
-                        <?php
-                        //ini id produk 
-                        ?>&
-                        id_user=
-                        <?php
-                        // ini id_user
-                        ?>
-                        "><i class=" bi bi-pencil-square me-2"></i>Edit
+                            <a class="btn btn-warning text-white" href="edit.php?id=<?php echo $row['id']; ?>&id_user=<?php echo $id_user ?>"><i class=" bi bi-pencil-square me-2"></i>Edit
                             </a>
 
-                            <a class="btn btn-danger" href="delete.php?id=
-                        <?php
-                        //ini id produk 
-                        ?>&
-                        id_user=
-                        <?php
-                        // ini id_user
-                        ?>
-                        "><i class="bi bi-trash2-fill me-2"></i>Hapus
+                            <a class="btn btn-danger" href="delete.php?id=<?php echo $row['id']; ?>&id_user=<?php echo $id_user ?>"><i class="bi bi-trash2-fill me-2"></i>Hapus
                             </a>
                         </td>
                     </tr>
