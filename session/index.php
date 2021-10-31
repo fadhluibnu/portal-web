@@ -7,12 +7,12 @@ if (isset($_COOKIE['idp']) && isset($_COOKIE['keyp'])) {
 
     // cek cookie
     $result = mysqli_query($conn, "SELECT * FROM user WHERE id=$id");
-    $row = mysqli_fetch_assoc($result);
+    $row1 = mysqli_fetch_assoc($result);
 
-    if ($key === hash('sha256', $row['id_user'])) {
+    if ($key == hash('sha256', $row1['id_user'])) {
         $_SESSION['masuk'] = true;
-        $_SESSION['user_name'] = $row['username'];
-        $_SESSION['id_user'] = $row['id_user'];
+        $_SESSION['user_name'] = $row1['username'];
+        $_SESSION['id_user'] = $row1['id_user'];
     }
 }
 
@@ -37,8 +37,8 @@ if (isset($_POST['login'])) {
             $_SESSION['user_name'] = $row['username'];
             $_SESSION['id_user'] = $row['id_user'];
             $_SESSION['masuk'] = true;
-            setcookie('idp', $row['id'], time() + 1000);
-            setcookie('keyp', hash('sha256', $row['id_user']), time() + 1000);
+            setcookie('idp', $row['id'], time() + 70);
+            setcookie('keyp', hash('sha256', $row['id_user']), time() + 70);
             header('Location: ../');
             exit;
         } else {
@@ -77,11 +77,12 @@ if (isset($_POST['daftar'])) {
     } else {
         $_SESSION['user_name'] = $username;
         $_SESSION['id_user'] = $id_user;
-        $_SESSION['masuk'] = true;
-        setcookie('idp', $row['id'], time() + 1000);
-        setcookie('keyp', hash('sha256', $row['id_user']), time() + 1000);
         $query = mysqli_query($conn, "INSERT INTO user (id_user, username, email, password) VALUES('$id_user', '$username', '$email', '$password')");
         if ($query == true) {
+            $rowdaftar = mysqli_fetch_assoc($get_email);
+            $_SESSION['masuk'] = true;
+            setcookie('idp', $rowdaftar['id'], time() + 70);
+            setcookie('keyp', hash('sha256', $rowdaftar['id_user']), time() + 70);
             header('Location: ../');
             exit;
         }

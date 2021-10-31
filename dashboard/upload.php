@@ -6,21 +6,29 @@ $id_user = $_SESSION['id_user'];
 
 if (isset($_POST["submit"])) {
 
-    //ngambil datanya
+    if (Tambah($_POST) > 0) {
+        echo "
+        <script>
+            alert('Produk berhasil di tambahkan');
+            //document.location.href='../dashboard/'
+        </script>";
+    } else {
+        echo "
+        <script>
+            alert('Produk gagal di tambahkan');
+            //document.location.href='../dashboard/upload.php'
+        </script>";
+    }
 
-    $judul_barang = $_POST["judul_barang"];
-    $harga = $_POST["harga"];
-    $link = $_POST["link"];
-    $gambar = $_POST["gambar"];
-    $kategori = $_POST["kategori"];
-    $deskripsi_barang = $_POST["deskripsi"];
-
-
-    //query
-    $query = " INSERT INTO barang
-                VALUES
-                ('','$id_user','$judul_barang','$deskripsi_barang','$gambar','$kategori','$harga','$link')";
-    mysqli_query($conn, $query);
+    // $id_user = $_POST['id_user'];
+    // $judul_barang = htmlspecialchars($_POST["judul_barang"]);
+    // $harga = htmlspecialchars($_POST["harga"]);
+    // $link = htmlspecialchars($_POST["link"]);
+    // $kategori = htmlspecialchars($_POST["kategori"]);
+    // $deskripsi_barang = htmlspecialchars($_POST["deskripsi"]);
+    // $query = mysqli_query($conn, " INSERT INTO barang
+    //             VALUES
+    //             ('','$id_user','$judul_barang','$deskripsi_barang','$gambar','$kategori','$harga','$link')");
 }
 ?>
 <!doctype html>
@@ -71,35 +79,35 @@ if (isset($_POST["submit"])) {
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 p-3 bg-white mt-3 rounded">
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <h2 class="h2 text-dark">Tambah Produk</h2>
                     </div>
                     <input type="hidden" name="id_user" value="<?php echo $id_user ?>">
                     <div class="mb-3">
                         <label for="judul_barang" class="form-label">Judul Barang</label>
-                        <input type="text" class="form-control" id="judul_barang" name="judul_barang" placeholder="Judul Barang">
+                        <input type="text" class="form-control" id="judul_barang" name="judul_barang" placeholder="Judul Barang" required>
                     </div>
                     <div class="mb-3">
                         <label for="harga" class="form-label">Harga</label>
-                        <input type="text" class="form-control" id="harga" name="harga" placeholder="Harga">
+                        <input type="text" class="form-control" id="harga" name="harga" placeholder="Harga" required>
                     </div>
                     <div class="mb-3">
                         <label for="wa" class="form-label">Nomor WhatsApp</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon3">+62</span>
-                            <input type="tel" class="form-control" id="wa" name="link" placeholder="Cth: 852123">
+                            <input type="tel" class="form-control" id="wa" name="link" placeholder="Cth: 852123" required>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="inputGroupFile01" class="form-label">Gambar <em>(thumbnail)</em></label>
                         <div class="input-group">
-                            <input type="file" class="form-control" id="inputGroupFile01" name="gambar">
+                            <input type="file" class="form-control" id="inputGroupFile01" name="gambar" required>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Kategori</label>
-                        <select name="kategori" class="form-select" aria-label="Default select example">
+                        <select required name="kategori" class="form-select" aria-label="Default select example">
                             <option selected>Open this select menu</option>
                             <option value="Pakaian">Pakaian</option>
                             <option value="Elektronik">Elektronik</option>
@@ -108,7 +116,7 @@ if (isset($_POST["submit"])) {
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
-                        <textarea class="form-control" name="deskripsi" id="exampleFormControlTextarea1" placeholder="Deskripsi barang" rows="3"></textarea>
+                        <textarea class="form-control" name="deskripsi" id="exampleFormControlTextarea1" placeholder="Deskripsi barang" rows="3"></textarea require>
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary"><i class="bi bi-check2-circle me-2"></i>Submit</button>
                 </form>
