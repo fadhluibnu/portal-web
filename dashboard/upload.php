@@ -16,8 +16,6 @@ if (isset($_POST["submit"])) {
     $deskripsi_barang = $_POST["deskripsi"];
 
 
-
-
     //query
     $query = " INSERT INTO barang
                 VALUES
