@@ -24,3 +24,30 @@ function cari($keyword)
     ");
     return $query;
 }
+
+// function ubah($conn) {
+
+//     global $conn;
+
+//     $id = $data["id"];
+//     $judul_barang = htmlspecialchars $_POST["judul_barang"];
+//     $harga = htmlspecialchars $_POST["harga"];
+//     $link = htmlspecialchars $_POST["link"];
+//     $gambar = htmlspecialchars $_POST["gambar"];
+//     $kategori = htmlspecialchars $_POST["kategori"];
+//     $deskripsi_barang = htmlspecialchars $_POST["deskripsi"];
+
+//     $sql = "UPDATE barang SET 
+//                         judul_barang = '$judul_barang',
+//                         harga = '$harga',
+//                         link = '$link',
+//                         gambar = $gambar,
+//                         kategori = '$kategori',
+//                         deskripsi_barang = '$deskripsi_barang'
+//                     WHERE 
+//                         id = $id
+//                         ";
+//     mysqli_query($conn,$sql);
+
+//     return mysqli_affected_rows($conn)
+//}
