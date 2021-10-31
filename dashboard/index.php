@@ -7,9 +7,6 @@ if (!isset($_SESSION['masuk'])) {
 include '../function.php';
 $user_name = $_SESSION['user_name'];
 $id_user = $_SESSION['id_user'];
-$conn = mysqli_connect("localhost", "root", "", "portal-dagang");
-
-
 $result = mysqli_query($conn, "SELECT * FROM barang WHERE id_user='$id_user'");
 ?>
 <!doctype html>

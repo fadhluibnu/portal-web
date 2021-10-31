@@ -6,7 +6,6 @@ if (!isset($_SESSION['masuk'])) {
 }
 require 'function.php';
 $user_name = $_SESSION['user_name'];
-$conn = mysqli_connect("localhost", "root", "", "portal-dagang");
 $result = mysqli_query($conn, "SELECT * FROM barang");
 
 if (isset($_POST["cari"])) {

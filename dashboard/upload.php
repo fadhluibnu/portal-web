@@ -1,6 +1,6 @@
 <?php
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "portal-dagang");
+require '../function.php';
 $user_name = $_SESSION['user_name'];
 $id_user = $_SESSION['id_user'];
 
