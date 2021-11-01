@@ -1,0 +1,97 @@
+
+// if (isset($_COOKIE['idp']) && isset($_COOKIE['keyp'])) {
+//     $id = $_COOKIE['idp'];
+//     $key = $_COOKIE['keyp'];
+
+//     // cek cookie
+//     $result = mysqli_query($conn, "SELECT * FROM user WHERE id=$id");
+//     $row1 = mysqli_fetch_assoc($result);
+
+//     if ($key === hash('sha256', $row1['id_user'])) {
+//         echo "
+//         <script>
+//             alert('masuk true');
+//         </script>";
+//         $_SESSION['masuk'] = true;
+//         $_SESSION['user_name'] = $row1['username'];
+//         $_SESSION['id_user'] = $row1['id_user'];
+//     }
+// }
+
+// if (isset($_SESSION['masuk'])) {
+//     header("Location: ../");
+//     exit;
+// }
+
+// if (isset($_POST['login'])) {
+
+//     $email = $_POST["email"];
+//     $password = $_POST["password"];
+
+//     $result_login = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email'");
+
+
+//     //cek email nya
+
+//     if (mysqli_num_rows($result_login) == 1) {
+//         $row = mysqli_fetch_assoc($result_login);
+//         if (password_verify($password, $row['password'])) {
+//             $_SESSION['user_name'] = $row['username'];
+//             $_SESSION['id_user'] = $row['id_user'];
+//             $_SESSION['masuk'] = true;
+//             if (isset($_POST['remember'])) {
+//                 setcookie('idp', $row['id'], time() + 70, "/");
+//                 setcookie('keyp', hash('sha256', $row['id_user']), time() + 70, "/");
+//             }
+//             header("Location: ../");
+//             exit;
+//         } else {
+//             echo "
+//             <script>
+//                 alert('Gagal Login');
+//             </script>";
+//         }
+//     } else {
+//         echo "
+//         <script>
+//             alert('Gagal Login');
+//         </script>";
+//     }
+// }
+// if (isset($_POST['daftar'])) {
+
+//     $generate = mysqli_query($conn, "SELECT max(id) AS maxID FROM user");
+//     $fect_gen = mysqli_fetch_array($generate);
+//     $id = $fect_gen['maxID'];
+
+//     $huruf = 'ID';
+
+//     $id_user = $huruf . sprintf('%04s', $id);
+//     $username = htmlspecialchars(addslashes($_POST['usernameDaf']));
+//     $email = $_POST['emailDaf'];
+//     $password = password_hash($_POST['passwordDaf'], PASSWORD_DEFAULT);
+
+//     $get_email = mysqli_query($conn, "SELECT * FROM user WHERE email='$email'");
+
+//     if (mysqli_num_rows($get_email) > 0) {
+//         echo "
+//             <script>
+//                 alert('Email ini telah digunakan');
+//             </script>";
+//     } else {
+//         $query = mysqli_query($conn, "INSERT INTO user (id_user, username, email, password) VALUES('$id_user', '$username', '$email', '$password')");
+//         if ($query == true) {
+//             $set_cookie = mysqli_query($conn, "SELECT * FROM user WHERE email='$email'");
+//             $rowdaftar = mysqli_fetch_assoc($set_cookie);
+//             $_SESSION['user_name'] = $username;
+//             $_SESSION['id_user'] = $id_user;
+//             $_SESSION['masuk'] = true;
+//             if (isset($_POST['remember'])) {
+//                 setcookie('idp', $rowdaftar['id'], time() + 70, "/");
+//                 setcookie('keyp', hash('sha256', $rowdaftar['id_user']), time() + 70, "/");
+//             }
+//             header("Location: ../");
+//             exit;
+//         }
+//     }
+// }

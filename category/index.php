@@ -137,7 +137,7 @@ if (isset($_GET['category'])) {
                                             height: 165px;
                                             background-size: cover;
                                             background-image:
-                                                url("../img/<?php echo $row['gambar'] ?>");
+                                                url("../image/<?php echo $row['gambar'] ?>");
                                         }
                                     </style>
 

@@ -1,0 +1,4 @@
+Nama DB : id17862428_portaldagang
+User DB : id17862428_portaldaganguser
+Host  : localhost
+pass : Fz?&<LbA_5dj$u-b

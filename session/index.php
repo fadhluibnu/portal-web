@@ -1,18 +1,29 @@
 <?php
 session_start();
 require '../function.php';
-if (isset($_COOKIE['idp']) && isset($_COOKIE['keyp'])) {
-    $id = $_COOKIE['idp'];
-    $key = $_COOKIE['keyp'];
 
-    // cek cookie
-    $result = mysqli_query($conn, "SELECT * FROM user WHERE id=$id");
-    $row1 = mysqli_fetch_assoc($result);
+// cookie keluar
+if (isset($_COOKIE['keluar']) == 'true') {
+    setcookie('portal_user', null, 0);
+    setcookie('portal_masuk', null, 0);
+    session_unset();
+    session_destroy();
+}
 
-    if ($key == hash('sha256', $row1['id_user'])) {
+// cek cookie
+if (isset($_COOKIE['portal_user']) && isset($_COOKIE['portal_masuk'])) {
+    $id = $_COOKIE['portal_user'];
+    $id_user = $_COOKIE['portal_masuk'];
+
+    // ambil data
+    $cookie = mysqli_query($conn, "SELECT * FROM user WHERE id=$id");
+    $row_cookie = mysqli_fetch_assoc($cookie);
+
+    // cek apakah cookie benar
+    if ($id_user == hash('sha256', $row_cookie['id_user'])) {
+        $_SESSION['user_name'] = $row_cookie['username'];
+        $_SESSION['id_user'] = $row_cookie['id_user'];
         $_SESSION['masuk'] = true;
-        $_SESSION['user_name'] = $row1['username'];
-        $_SESSION['id_user'] = $row1['id_user'];
     }
 }
 
@@ -21,74 +32,109 @@ if (isset($_SESSION['masuk'])) {
     exit;
 }
 
+
+// login
 if (isset($_POST['login'])) {
 
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+    // tangkap name
+    $email = $_POST['email'];
+    $password = hash('sha256', $_POST['password']); ?>
+    <script>
+        var email = "<?php echo $email ?>";
+    </script>
+    <?php
 
-    $result_login = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email'");
+    // ambil data 
+    $data = mysqli_query($conn, "SELECT * FROM user WHERE email='$email'");
 
+    // cek login
+    if (mysqli_num_rows($data) == 1) {
+        $row_data = mysqli_fetch_assoc($data);
 
-    //cek email nya
+        // cek password
+        if ($password == $row_data['password']) {
 
-    if (mysqli_num_rows($result_login) == 1) {
-        $row = mysqli_fetch_assoc($result_login);
-        if (password_verify($password, $row['password'])) {
-            $_SESSION['user_name'] = $row['username'];
-            $_SESSION['id_user'] = $row['id_user'];
+            // membuat session yang dibutuhkan
+            $_SESSION['user_name'] = $row_data['username'];
+            $_SESSION['id_user'] = $row_data['id_user'];
             $_SESSION['masuk'] = true;
-            setcookie('idp', $row['id'], time() + 70);
-            setcookie('keyp', hash('sha256', $row['id_user']), time() + 70);
-            header('Location: ../');
+            setcookie('keluar', 'true', time() - 3600);
+
+            // membuat cookie
+            setcookie('portal_user', $row_data['id'], time() + 3600);
+            setcookie('portal_masuk', hash('sha256', $row_data['id_user']), time() + 3600);
+
+            // pindahkan ke halaman beranda
+            header("Location: ../");
             exit;
         } else {
             echo "
-            <script>
-                alert('Gagal Login');
-            </script>";
+                <script>
+                    alert('Password yang anda masukkan salah');
+                </script>";
         }
     } else {
         echo "
-        <script>
-            alert('Gagal Login');
-        </script>";
+            <script>
+                alert('Data dengan email '+email+' tidak ditemukan');
+            </script>";
     }
 }
-if (isset($_POST['daftar'])) {
 
+// registrasi
+if (isset($_POST['daftar'])) {
     $generate = mysqli_query($conn, "SELECT max(id) AS maxID FROM user");
     $fect_gen = mysqli_fetch_array($generate);
     $id = $fect_gen['maxID'];
-
     $huruf = 'ID';
 
     $id_user = $huruf . sprintf('%04s', $id);
     $username = htmlspecialchars(addslashes($_POST['usernameDaf']));
-    $email = $_POST['emailDaf'];
-    $password = password_hash($_POST['passwordDaf'], PASSWORD_DEFAULT);
+    $email = htmlspecialchars($_POST['emailDaf']);
+    $password = hash('sha256', $_POST['passwordDaf']);
+    ?>
+    <script>
+        var email = "<?php echo $email ?>";
+    </script>
+<?php
 
-    $get_email = mysqli_query($conn, "SELECT * FROM user WHERE email='$email'");
+    // cek apakah email sudah digunakan
+    $cek_email = mysqli_query($conn, "SELECT * FROM user WHERE email='$email'");
+    if (mysqli_num_rows($cek_email) == 0) {
 
-    if (mysqli_num_rows($get_email) > 0) {
+        // insert data registrasi
+        $daftar = mysqli_query($conn, "INSERT INTO user (id_user,username,email,password) 
+        VALUES ('$id_user','$username','$email','$password')");
+
+        // cek jika berhasil
+        if ($daftar == true) {
+
+            // membuat session yang dibutuhkan
+            $_SESSION['user_name'] = $username;
+            $_SESSION['id_user'] = $id_user;
+            $_SESSION['masuk'] = true;
+
+            // membuat cookie
+            $cookie = mysqli_query($conn, "SELECT * FROM user WHERE id_user = '$id_user'");
+            $row_cookie = mysqli_fetch_assoc($cookie);
+            setcookie('portal_user', $row_cookie['id'], time() + 3600);
+            setcookie('portal_masuk', hash('sha256', $row_cookie['id_user']), time() + 3600);
+            setcookie('keluar', 'true', time() - 3600);
+
+            // pindahkan ke halaman beranda
+            header("Location: ../");
+            exit;
+        } else {
+            var_dump($daftar);
+            echo $id_user;
+        }
+    } else {
         echo "
             <script>
-                alert('Email ini telah digunakan');
+                alert('Email '+email+' telah digunakan');
             </script>";
-    } else {
-        $_SESSION['user_name'] = $username;
-        $_SESSION['id_user'] = $id_user;
-        $query = mysqli_query($conn, "INSERT INTO user (id_user, username, email, password) VALUES('$id_user', '$username', '$email', '$password')");
-        if ($query == true) {
-            $rowdaftar = mysqli_fetch_assoc($get_email);
-            $_SESSION['masuk'] = true;
-            setcookie('idp', $rowdaftar['id'], time() + 70);
-            setcookie('keyp', hash('sha256', $rowdaftar['id_user']), time() + 70);
-            header('Location: ../');
-            exit;
-        }
     }
 }
-
 
 ?>
 <!doctype html>
@@ -138,12 +184,11 @@ if (isset($_POST['daftar'])) {
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" name="email" id="email" required>
+                                    <input type="email" class="form-control" name="email" id="email">
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" name="password" id="password" required>
-                                    <a href="" class="nav-link mt-1 p-0">Forgot password?</a>
+                                    <input type="password" class="form-control" name="password" id="password">
                                 </div>
                                 <button type="submit" name="login" class="w-100 pt-3 pb-3 btn btn-primary"><i class="bi bi-door-open-fill me-2"></i>Login</button>
                             </form>

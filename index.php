@@ -4,6 +4,12 @@ if (!isset($_SESSION['masuk'])) {
     header("Location: session/");
     exit;
 }
+
+if (isset($_COOKIE['keluar']) == 'true') {
+    header("Location: session/");
+    exit;
+}
+
 require 'function.php';
 $user_name = $_SESSION['user_name'];
 $result = mysqli_query($conn, "SELECT * FROM barang");
@@ -104,7 +110,7 @@ if (isset($_POST["cari"])) {
                                         height: 165px;
                                         background-size: cover;
                                         background-image:
-                                            url("img/<?php echo $row['gambar'] ?>");
+                                            url("image/<?php echo $row['gambar'] ?>");
                                     }
                                 </style>
 
