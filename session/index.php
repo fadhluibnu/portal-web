@@ -150,14 +150,14 @@ if (isset($_POST['daftar'])) {
     <title>Login - Portal Dagang</title>
 </head>
 
-<body class="bg-light">
-    <div class="container">
-        <div class="row" style="height: 100vh;">
-            <div class="row m-auto align-items-center">
-                <div class="col-6">
-                    <h1 class="h1 text-dark">Portal <span class="text-primary">Dagang</span></h1>
-                </div>
-                <div class="col-6 bg-white p-3 rounded">
+<body class="bg-light d-flex" style="width: 100%;height:100vh;">
+    <div class="container m-auto">
+        <div class="row flex-column flex-md-row align-items-center">
+            <div class="col-12 col-md-5 col-lg-6 mb-3 mb-md-0">
+                <h1 class="h1 text-dark">Portal <span class="text-primary">Dagang</span></h1>
+            </div>
+            <div class="col-12 col-md-7 col-lg-6">
+                <div class="bg-white p-3 rounded">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
