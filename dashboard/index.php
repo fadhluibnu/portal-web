@@ -1,7 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION['masuk'])) {
-    header("Location: ../session/");
+    header("Location: session/");
+    exit;
+}
+
+if (isset($_COOKIE['keluar']) == 'true') {
+    header("Location: session/");
     exit;
 }
 include '../function.php';

@@ -2,7 +2,12 @@
 session_start();
 require '../function.php';
 if (!isset($_SESSION['masuk'])) {
-    header("Location: ../session/");
+    header("Location: session/");
+    exit;
+}
+
+if (isset($_COOKIE['keluar']) == 'true') {
+    header("Location: session/");
     exit;
 }
 $user_name = $_SESSION['user_name'];
