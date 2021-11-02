@@ -12,9 +12,14 @@ if (isset($_COOKIE['keluar']) == 'true') {
 }
 $user_name = $_SESSION['user_name'];
 $result = mysqli_query($conn, "SELECT * FROM barang");
-$kategori = $_GET['category'];
 if (isset($_GET['category'])) {
+    $kategori = $_GET['category'];
     $result = mysqli_query($conn, "SELECT * FROM barang WHERE kategori LIKE '%$kategori%'");
+}
+if (isset($_POST['cari'])) {
+    $kategori = $_GET['category'];
+    $input = $_POST['input'];
+    $result = mysqli_query($conn, "SELECT * FROM barang WHERE kategori LIKE '%$kategori%' AND judul_barang LIKE '%$input%'");
 }
 ?>
 <!doctype html>
@@ -37,10 +42,10 @@ if (isset($_GET['category'])) {
 <body class="bg-light">
     <nav class="navbar navbar-light bg-white fixed-top">
         <div class="container pt-2 pb-2 flex-column flex-md-row">
-            <a href="" class="navbar-brand d-none d-lg-block nav text-dark">
+            <a href="../" class="navbar-brand d-none d-lg-block nav text-dark">
                 Portal <span class="text-primary">Dagang</span>
             </a>
-            <form class="d-flex me-2 form">
+            <form method="POST" class="d-flex me-2 form">
                 <input class="form-control me-2" name="input" type="search" placeholder="Cari barang" aria-label="Search">
                 <button class="btn btn-primary" name="cari" type="submit"><i class="bi bi-search"></i></button>
             </form>
@@ -48,12 +53,7 @@ if (isset($_GET['category'])) {
                 <button class="btn bg-light mt-2 mt-md-0 me-2 user text-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person me-2"></i><?php echo $user_name; ?>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li>
-                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="bi bi-person me-2"></i>Profil
-                        </button>
-                    </li>
-                    <li><a href="dashboard/" class="btn"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                    <li><a href="../dashboard/" class="btn"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
                     <li><a href="../logout.php" class="btn"><i class="bi bi-box-arrow-left me-2"></i>Logout</a></li>
                 </ul>
             </div>
@@ -115,8 +115,6 @@ if (isset($_GET['category'])) {
                                 </div>
                             </div>
                         </div>
-                        <!-- <button class="text-start font nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#beranda" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="bi bi-house-door me-2"></i>Beranda</button>
-                        <button type="button" class="text-start font nav-link active">...</button> -->
                     </div>
                 </div>
             </div>

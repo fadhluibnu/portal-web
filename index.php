@@ -108,6 +108,7 @@ if (isset($_POST["cari"])) {
                                     div.img<?= $i ?> {
                                         width: 100%;
                                         height: 165px;
+                                        background-position: center;
                                         background-size: cover;
                                         background-image:
                                             url("image/<?php echo $row['gambar'] ?>");
@@ -149,6 +150,7 @@ if (isset($_POST["cari"])) {
                     <?php
                         $i++;
                     endwhile; ?>
+                    <div class="bottom d-inline-block d-md-none w-100" style="height: 150px;"></div>
                 </div>
             </div>
         </div>
