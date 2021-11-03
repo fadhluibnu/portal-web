@@ -2,7 +2,8 @@
 require '../function.php';
 $id = $_GET["id"];
 
-if (hapus($id) > 0) {
+$delete = mysqli_query($conn, "DELETE FROM barang WHERE id = $id");
+if ($delete == true) {
     echo "
     <script>
     alert('Produk berhasil di hapus');

@@ -107,15 +107,23 @@ function ubah($data)
     $judul_barang = htmlspecialchars($data["judul_barang"]);
     $harga = htmlspecialchars($data["harga"]);
     $link = htmlspecialchars($data["link"]);
-    $gambar = htmlspecialchars($data["gambar"]);
     $kategori = htmlspecialchars($data["kategori"]);
     $deskripsi_barang = htmlspecialchars($data["deskripsi"]);
+
+    $gambarLama = htmlspecialchars($data["gambarLama"]);
+
+    // cek apakah user pilih gambar baru
+    if ($_FILES['gambar']['error'] === 4) {
+        $gambar = $gambarLama;
+    } else {
+        $gambar = upload();
+    }
 
     $sql = "UPDATE barang SET 
                         judul_barang = '$judul_barang',
                         harga = '$harga',
                         link = '$link',
-                        gambar = $gambar,
+                        gambar = '$gambar',
                         kategori = '$kategori',
                         deskripsi_barang = '$deskripsi_barang'
                     WHERE 
@@ -126,8 +134,8 @@ function ubah($data)
     return mysqli_affected_rows($conn);
 }
 
-function hapus ($id){
+function hapus($id)
+{
     global $conn;
-    mysqli_query($conn,"DELETE FROM barang WHERE id = $id");
     return mysqli_affected_rows($conn);
 }

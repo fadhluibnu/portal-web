@@ -22,7 +22,7 @@ $barang = query("SELECT * FROM barang WHERE id = $id AND id_user='$user_id'");
 
 if (isset($_POST["submit"])) {
 
-    if (ubah($_POST) > 0) {
+    if (ubah($_POST) == true) {
         echo "
         <script>
             alert('data berhasil di edit');
@@ -59,20 +59,15 @@ if (isset($_POST["submit"])) {
             <a class="navbar-brand nav text-dark pe-4 border-end" href="../">
                 Portal <span class="text-primary ms-1">Dagang</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link" href="../dashboard/">Semua Produk</a>
-                    <a class="nav-link active" aria-current="page" href="">ubah Produk</a>
-                </div>
+            <div class="navbar-nav d-none d-sm-flex flex-row me-auto">
+                <a class="nav-link active" aria-current="page" href="../dashboard/">Semua Produk</a>
+                <a class="nav-link ms-2" href="">Tambah Produk</a>
             </div>
-            <form class="d-flex">
+            <form method="POST" class="d-none d-lg-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-            <div class="dropdown ms-3">
+            <div class="d-none d-sm-block dropdown ms-3">
                 <button class="btn bg-light mt-2 mt-md-0 me-2 user text-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person me-2"></i><?php echo $user_name; ?>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="z-index: 9999;">
@@ -80,16 +75,67 @@ if (isset($_POST["submit"])) {
                     <li><a href="../logout.php" class="btn"><i class="bi bi-box-arrow-left me-2"></i>Logout</a></li>
                 </ul>
             </div>
+            <!-- </div> -->
+
+            <!-- tablet -->
+            <button class="btn d-none d-sm-flex d-lg-none" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"">
+                <span class=" navbar-toggler-icon"></span>
+            </button>
+            <div class="d-none d-sm-flex d-lg-none offcanvas offcanvas-top" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="height: 10vh;">
+                <div class="container offcanvas-header flex-column">
+                    <form method="POST" class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- mobile -->
+            <button class="btn d-flex d-sm-none" data-bs-toggle="offcanvas" href="#offcanvasExample1" role="button" aria-controls="offcanvasExample"">
+                <span class=" navbar-toggler-icon"></span>
+            </button>
+            <div class="d-flex d-sm-none offcanvas offcanvas-top" tabindex="-1" id="offcanvasExample1" aria-labelledby="offcanvasExampleLabel" style="height: 20vh;">
+                <div class="container offcanvas-header flex-column">
+                    <form method="POST" class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                    <div class="dropdown ms-3">
+                        <button class="btn bg-light mt-2 mt-md-0 me-2 user text-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person me-2"></i><?php echo $user_name; ?>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="z-index: 9999;">
+                            <li><a href="../" class="btn"><i class="bi bi-speedometer2 me-2"></i>Beranda</a></li>
+                            <li><a href="../logout.php" class="btn"><i class="bi bi-box-arrow-left me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- add mobile -->
+            <a href="../dashboard/" class="togle fixed-bottom bg-primary d-flex d-sm-none">
+                <i class="bi bi-arrow-left m-auto text-white"></i>
+            </a>
+            <style>
+                .togle {
+                    left: 80%;
+                    bottom: 51px;
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                }
+            </style>
+
         </div>
     </nav>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-6 p-3 bg-white mt-3 rounded">
-                <form action="" method="post">
+            <div class="col-12 col-md-8 col-lg-6 p-3 bg-white mt-3 rounded">
+                <form action="" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <h2 class="h2 text-dark">Ubah Produk</h2>
                     </div>
-                    <input type="hidden" name="id_user" value="<?php echo $id_user ?>">
+                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                    <input type="hidden" name="gambarLama" value="<?php echo $barang['gambar'] ?>">
                     <div class="mb-3">
                         <label for="judul_barang" class="form-label">Judul Barang</label>
                         <input type="text" class="form-control" id="judul_barang" name="judul_barang" placeholder="" value="<?php echo $barang['judul_barang'] ?>">
@@ -107,8 +153,9 @@ if (isset($_POST["submit"])) {
                     </div>
                     <div class="mb-3">
                         <label for="inputGroupFile01" class="form-label">Gambar <em>(thumbnail)</em></label>
+                        <img src="../image/<?= $barang['gambar'] ?>" alt="" width="100%" class="mb-2 rounded">
                         <div class="input-group">
-                            <input type="file" class="form-control" id="inputGroupFile01" name="gambar" placeholder="<?php echo $barang['gambar'] ?>" value="<?php echo $barang['gambar'] ?>">
+                            <input type="file" class="form-control" id="inputGroupFile01" name="gambar" placeholder="">
                         </div>
                     </div>
                     <div class="mb-3">
