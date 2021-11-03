@@ -141,8 +141,7 @@ if (isset($_POST["cari"])) {
                                     <div class="d-flex flex-column">
                                         <a href="<?php //ini ntar ngarah ke detail tapi blm kebuat 
                                                     ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
-                                        <a href="<?php echo $row['link']
-                                                    ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
+                                        <a target="_blank" href="https://api.whatsapp.com/send?phone=+62<?php echo $row['link'] ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
                                     </div>
                                 </div>
                             </div>
