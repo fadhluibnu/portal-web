@@ -37,7 +37,7 @@ if (isset($_POST["cari"])) {
 <body class="bg-light">
     <nav class="navbar navbar-light bg-white fixed-top">
         <div class="container pt-2 pb-2 flex-column flex-md-row">
-            <a href="" class="navbar-brand d-none d-lg-block nav text-dark">
+            <a href="" class="navbar-brand d-none d-sm-block nav text-dark">
                 Portal <span class="text-primary">Dagang</span>
             </a>
             <form method="POST" class="d-flex me-2 form">
@@ -139,8 +139,7 @@ if (isset($_POST["cari"])) {
                                         </tr>
                                     </table>
                                     <div class="d-flex flex-column">
-                                        <a href="<?php //ini ntar ngarah ke detail tapi blm kebuat 
-                                                    ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
+                                        <a href="detail/detail.php?id=<?php echo $row['id'] ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
                                         <a target="_blank" href="https://api.whatsapp.com/send?phone=+62<?php echo $row['link'] ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
                                     </div>
                                 </div>

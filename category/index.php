@@ -42,7 +42,7 @@ if (isset($_POST['cari'])) {
 <body class="bg-light">
     <nav class="navbar navbar-light bg-white fixed-top">
         <div class="container pt-2 pb-2 flex-column flex-md-row">
-            <a href="../" class="navbar-brand d-none d-lg-block nav text-dark">
+            <a href="../" class="navbar-brand d-none d-sm-block nav text-dark">
                 Portal <span class="text-primary">Dagang</span>
             </a>
             <form method="POST" class="d-flex me-2 form">

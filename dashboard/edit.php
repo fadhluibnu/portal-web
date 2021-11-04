@@ -60,8 +60,8 @@ if (isset($_POST["submit"])) {
                 Portal <span class="text-primary ms-1">Dagang</span>
             </a>
             <div class="navbar-nav d-none d-sm-flex flex-row me-auto">
-                <a class="nav-link active" aria-current="page" href="../dashboard/">Semua Produk</a>
-                <a class="nav-link ms-2" href="">Tambah Produk</a>
+                <a class="nav-link" href="../dashboard/">Semua Produk</a>
+                <a class="nav-link ms-2 active" aria-current="page" href="">Tambah Produk</a>
             </div>
             <form method="POST" class="d-none d-lg-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

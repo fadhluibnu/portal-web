@@ -31,22 +31,18 @@ function Tambah($data)
     global $conn;
 
     $id_user = $data['id_user'];
-    $judul_barang = htmlspecialchars($data["judul_barang"]);
-    $harga = htmlspecialchars($data["harga"]);
-    $link = htmlspecialchars($data["link"]);
-    $kategori = htmlspecialchars($data["kategori"]);
-    $deskripsi_barang = htmlspecialchars($data["deskripsi"]);
+    $judul_barang = htmlspecialchars($data['judul_barang']);
+    $harga = htmlspecialchars($data['harga']);
+    $link = htmlspecialchars($data['link']);
+    $kategori = htmlspecialchars($data['kategori']);
+    $deskripsi_barang = htmlspecialchars($data['deskripsi']);
 
     $gambar = upload();
     if (!$gambar) {
         return false;
     }
 
-
-
-    $query = "INSERT INTO barang
-                VALUES
-                ('','$id_user','$judul_barang','$deskripsi_barang','$gambar','$kategori','$harga','$link')";
+    $query = "INSERT INTO barang (id_user,judul_barang,deskripsi_barang,gambar,kategori,harga,link) VALUES ('$id_user','$judul_barang','$deskripsi_barang','$gambar','$kategori','$harga','$link')";
     mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);

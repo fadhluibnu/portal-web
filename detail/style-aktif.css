@@ -1,0 +1,7 @@
+.aktif {
+  background-color: var(--bs-blue) !important;
+  color: white !important;
+}
+.dropdown {
+  z-index: 99999;
+}
