@@ -161,17 +161,15 @@ if (isset($_POST['cari'])) {
                                                 <td>
                                                     <div class="text-danger">
                                                         <?php
-                                                        $row['harga'];
+                                                        echo $row['harga'];
                                                         ?>
                                                     </div>
                                                 </td>
                                             </tr>
                                         </table>
                                         <div class="d-flex flex-column">
-                                            <a href="<?php //ini ntar ngarah ke detail tapi blm kebuat 
-                                                        ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
-                                            <a href="<?php //ini buat naruh link di tabel barang 
-                                                        ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
+                                            <a href="../detail/detail.php?id=<?php echo $row['id'] ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
+                                            <a href="https://api.whatsapp.com/send?phone=+62<?php echo $row['link'] ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
                                         </div>
                                     </div>
                                 </div>
