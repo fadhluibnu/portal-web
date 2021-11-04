@@ -9,16 +9,6 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="style-aktif.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
-
-    <!-- <style>
-        body {
-            position: relative;
-        }
-
-        .container {
-            margin-top: 100px;
-        }
-    </style> -->
     <title>Hello, world!</title>
 </head>
 
@@ -26,6 +16,7 @@
 session_start();
 require '../function.php';
 $user_name = $_SESSION['user_name'];
+$kategori = $_GET['category'];
 ?>
 
 <body class="bg-light">
@@ -50,7 +41,7 @@ $user_name = $_SESSION['user_name'];
     </nav>
     <nav id="navbarDetail" class="navbar navbar-light px-3 sticky-top" style="z-index: 1023;">
         <div class="container navbarDetail  bg-white p-3 rounded">
-            <a href="../" class="nav-link"><i class="bi bi-chevron-left me-2"></i>Beranda</a>
+            <a href="../" class="nav-link"><i class="bi bi-chevron-left me-2"></i><span class="d-none d-sm-inline-block">Beranda</span></a>
             <ul class="nav nav-pills me-auto">
                 <li class="nav-item">
                     <a href="#deskripsi" class="nav-link deskripsi bg-light text-dark">Deskripsi</a>
@@ -59,17 +50,17 @@ $user_name = $_SESSION['user_name'];
                     <a href="#diskusi" class="nav-link diskusi text-dark">Produk Serupa</a>
                 </li>
             </ul>
-            <a target="_blank" href="https://api.whatsapp.com/send?phone=" class="btn btn-primary ms-auto"><i class="bi bi-megaphone me-2"></i>Hubungi penjual</a>
+            <a target="_blank" href="https://api.whatsapp.com/send?phone=" class="btn btn-primary fixed-bottom sticky-sm-top p-3 ps-sm-3 pe-sm-3 pt-sm-2 pb-sm-2 ms-auto"><i class="bi bi-megaphone me-2"></i>Hubungi penjual</a>
         </div>
     </nav>
 
     <div id="deskripsi" class="container-fluid bg-light deskripsiDetail">
         <div class="row">
             <div class="col-12">
-                <div id="satu" class="row">
+                <div id="satu" class="row justify-content-center">
                     <?php //muali loop 
                     ?>
-                    <div class="col-4">
+                    <div class="col-md-6 col-lg-4 mb-3 mb-lg-0">
                         <div class="bg-white p-3 rounded sticky-top" style="top: 86px;">
                             <div id="gambarAsli" class="gambar rounded"></div>
                             <?php
@@ -87,7 +78,7 @@ $user_name = $_SESSION['user_name'];
                             </style>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-6 col-lg-5 mb-3 mb-lg-0">
                         <div class="bg-white p-3 rounded sticky-top">
                             <h1 class="detail text-dark"><?php //ini judul 
                                                             ?></h1>
@@ -118,7 +109,7 @@ $user_name = $_SESSION['user_name'];
                             </table>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-md-10 col-lg-3">
                         <div class="bg-white p-3 rounded sticky-top" style="top: 86px;">
                             <h5 class="h5">Komentar</h5>
                             <div class="komentar">
@@ -134,7 +125,7 @@ $user_name = $_SESSION['user_name'];
                                     <label for="komentar" class="form-label fw-bold">Komentar</label>
                                     <div class="d-flex">
                                         <input type="text" class="form-control me-2" name="komentar" id="komentar" placeholder="komentar anda">
-                                        <button type="button" class="btn btn-primary"><i class="bi bi-chat-right-text-fill"></i></button>
+                                        <button type="sumbit" name="comment" class="btn btn-primary"><i class="bi bi-chat-right-text-fill"></i></button>
                                     </div>
                                 </div>
                             </form>
@@ -144,14 +135,67 @@ $user_name = $_SESSION['user_name'];
             </div>
         </div>
     </div>
-    <div id="diskusi" class="container-fluid diskusiDetail mt-3" style="height: 500px;">
-        <div class="row">
-            <div class="col-6">
-                <div class="bg-white p-3 rounded" style="height: 700px;">
-                    pesan
-                </div>
-            </div>
+    <div id="diskusi" class="container diskusiDetail mt-5" style="height: 500px;">
+        <div class="d-flex align-items-center justify-content-between">
+            <span class="garis1 rounded"></span>
+            <h2 class="h2 text-center text-produk">Produk Serupa</h2>
+            <span class="garis2 rounded"></span>
         </div>
+        <div class="row justify-content-center">
+            <?php
+            $barang_serupa = mysqli_query($conn, "SELECT * FROM barang WHERE kategori='$kategori'");
+            $i = 0;
+            while ($serupa = mysqli_fetch_array($barang_serupa)) :
+                $i++
+            ?>
+                <div class="col-11 col-md-5 col-lg-3 mb-3">
+                    <div class="card rounded border-white p-2">
+                        <div class="img<?= $i ?> rounded"></div>
+                        <!-- style img -->
+                        <style>
+                            div.img<?= $i ?> {
+                                width: 100%;
+                                height: 165px;
+                                background-position: center;
+                                background-size: cover;
+                                background-image:
+                                    url("../image/<?php echo $serupa['gambar'] ?>");
+                            }
+                        </style>
+
+                        <div class="card-body mt-1 p-0">
+                            <h5 class="card-title">
+                                <?php
+                                echo $serupa['judul_barang']
+                                ?>
+                            </h5>
+                            <table class="mb-2">
+                                <tr>
+                                    <td>
+                                        <p class="harga p-0 m-0">Harga</p>
+                                    </td>
+                                    <td>
+                                        <span class="harga">:</span>
+                                    </td>
+                                    <td>
+                                        <div class="text-danger">
+                                            <?php
+                                            echo $serupa['harga'];
+                                            ?>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="d-flex flex-column">
+                                <a href="../detail/detail.php?id=<?php echo $serupa['id'] ?>&category=<?php echo $serupa['kategori'] ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
+                                <a target="_blank" href="https://api.whatsapp.com/send?phone=+62<?php echo $serupa['link'] ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endwhile; ?>
+        </div>
+    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

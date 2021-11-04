@@ -5,3 +5,14 @@
 .dropdown {
   z-index: 99999;
 }
+
+.garis1,
+.garis2 {
+  display: inline-block;
+  height: 2px;
+  width: 40%;
+  background-color: #a0a5d7;
+}
+.text-produk {
+  color: #a0a5d7;
+}
