@@ -1,7 +1,8 @@
 <?php
 session_start();
+setcookie('portal_user', '', 1, '/');
+setcookie('portal_masuk', '', 1, '/');
 session_unset();
 session_destroy();
-setcookie('keluar', 'true');
 header("Location: session/");
 exit;

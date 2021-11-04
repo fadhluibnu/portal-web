@@ -2,16 +2,12 @@
 session_start();
 require '../function.php';
 
-// cookie keluar
-if (isset($_COOKIE['keluar']) == 'true') {
-    setcookie('portal_user', null, 0);
-    setcookie('portal_masuk', null, 0);
-    session_unset();
-    session_destroy();
-}
 
 // cek cookie
 if (isset($_COOKIE['portal_user']) && isset($_COOKIE['portal_masuk'])) {
+    echo "<script>
+    alert('hapus')
+</script>";
     $id = $_COOKIE['portal_user'];
     $id_user = $_COOKIE['portal_masuk'];
 
@@ -58,11 +54,10 @@ if (isset($_POST['login'])) {
             $_SESSION['user_name'] = $row_data['username'];
             $_SESSION['id_user'] = $row_data['id_user'];
             $_SESSION['masuk'] = true;
-            setcookie('keluar', 'true', time() - 3600);
 
             // membuat cookie
-            setcookie('portal_user', $row_data['id'], time() + 3600);
-            setcookie('portal_masuk', hash('sha256', $row_data['id_user']), time() + 3600);
+            setcookie('portal_user', $row_data['id'], time() + 3600, "/");
+            setcookie('portal_masuk', hash('sha256', $row_data['id_user']), time() + 3600, "/");
 
             // pindahkan ke halaman beranda
             header("Location: ../");
@@ -117,9 +112,8 @@ if (isset($_POST['daftar'])) {
             // membuat cookie
             $cookie = mysqli_query($conn, "SELECT * FROM user WHERE id_user = '$id_user'");
             $row_cookie = mysqli_fetch_assoc($cookie);
-            setcookie('portal_user', $row_cookie['id'], time() + 3600);
-            setcookie('portal_masuk', hash('sha256', $row_cookie['id_user']), time() + 3600);
-            setcookie('keluar', 'true', time() - 3600);
+            setcookie('portal_user', $row_cookie['id'], time() + 3600, "/");
+            setcookie('portal_masuk', hash('sha256', $row_cookie['id_user']), time() + 3600, "/");
 
             // pindahkan ke halaman beranda
             header("Location: ../");

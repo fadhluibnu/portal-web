@@ -5,10 +5,10 @@ if (!isset($_SESSION['masuk'])) {
     exit;
 }
 
-if (isset($_COOKIE['keluar']) == 'true') {
-    header("Location: session/");
-    exit;
-}
+// if (isset($_COOKIE['keluar']) == 'true') {
+//     header("Location: session/");
+//     exit;
+// }
 
 require 'function.php';
 $user_name = $_SESSION['user_name'];
