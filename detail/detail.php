@@ -126,10 +126,11 @@ if (isset($_POST['comment'])) {
                         <div class="bg-white p-3 rounded sticky-top" style="top: 86px;">
                             <h5 class="h5">Komentar</h5>
                             <div class="komentar">
+                                <?php /* mulai loop komentar */ ?>
                                 <div class="mb-1">
-                                    <p class="text-dark mb-0">Komentar <span class=" fw-bold">User</span> :</p>
+                                    <p class="text-dark mb-0">Komentar <span class=" fw-bold"><?php /* user dari komentar */ ?></span> :</p>
                                     <div class="ps-3">
-                                        <p class="text-dark">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                        <p class="text-dark"><?php /* komentar */ ?></p>
                                     </div>
                                 </div>
                             </div>
