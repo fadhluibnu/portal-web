@@ -1,7 +1,14 @@
 <?php
 session_start();
 require '../function.php';
-
+$password_salah = false;
+$email_notFound = false;
+$nama_notFound = '';
+$email_digunakan = false;
+$error_regist = false;
+$login_aktif = 'active';
+$daftar_aktif = '';
+$nama_email = '';
 
 // cek cookie
 if (isset($_COOKIE['portal_user']) && isset($_COOKIE['portal_masuk'])) {
@@ -34,6 +41,8 @@ if (isset($_POST['login'])) {
 
     // tangkap name
     $email = $_POST['email'];
+    $nama_notFound = $email;
+    $nama_email = $email;
     $password = hash('sha256', $_POST['password']); ?>
     <script>
         var email = "<?php echo $email ?>";
@@ -63,21 +72,19 @@ if (isset($_POST['login'])) {
             header("Location: ../");
             exit;
         } else {
-            echo "
-                <script>
-                    alert('Password yang anda masukkan salah');
-                </script>";
+            $password_salah = true;
         }
     } else {
-        echo "
-            <script>
-                alert('Data dengan email '+email+' tidak ditemukan');
-            </script>";
+        $email_notFound = true;
+        $nama_email = '';
     }
 }
 
 // registrasi
 if (isset($_POST['daftar'])) {
+    $login_aktif = '';
+    $daftar_aktif = 'active';
+
     $generate = mysqli_query($conn, "SELECT max(id) AS maxID FROM user");
     $fect_gen = mysqli_fetch_array($generate);
     $id = $fect_gen['maxID'];
@@ -87,6 +94,7 @@ if (isset($_POST['daftar'])) {
     $username = htmlspecialchars(addslashes($_POST['usernameDaf']));
     $email = htmlspecialchars($_POST['emailDaf']);
     $password = hash('sha256', $_POST['passwordDaf']);
+    $nama_notFound = $email;
     ?>
     <script>
         var email = "<?php echo $email ?>";
@@ -119,14 +127,10 @@ if (isset($_POST['daftar'])) {
             header("Location: ../");
             exit;
         } else {
-            var_dump($daftar);
-            echo $id_user;
+            $error_regist = true;
         }
     } else {
-        echo "
-            <script>
-                alert('Email '+email+' telah digunakan');
-            </script>";
+        $email_digunakan = true;
     }
 }
 
@@ -154,14 +158,14 @@ if (isset($_POST['daftar'])) {
                 <div class="bg-white p-3 rounded">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
+                            <button class="nav-link <?php echo $login_aktif ?>" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
                             <script>
                                 var login = document.getElementById('nav-home-tab');
                                 login.addEventListener('click', function() {
                                     document.title = 'Login - Portal Dagang'
                                 })
                             </script>
-                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#daftar" type="button" role="tab" aria-controls="daftar" aria-selected="false">Daftar</button>
+                            <button class="nav-link <?php echo $daftar_aktif ?>" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#daftar" type="button" role="tab" aria-controls="daftar" aria-selected="false">Daftar</button>
                             <script>
                                 var login = document.getElementById('nav-profile-tab');
                                 login.addEventListener('click', function() {
@@ -171,15 +175,27 @@ if (isset($_POST['daftar'])) {
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="tab-pane fade show <?php echo $login_aktif ?>" id="login" role="tabpanel" aria-labelledby="nav-home-tab">
                             <form action="" method="POST">
                                 <div class="mt-3 mb-3">
                                     <h2 class="h2 text-dark mb-0">Masuk</h2>
                                 </div>
+                                <?php if ($email_notFound == true) : ?>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        Email <strong><?php echo $nama_notFound ?></strong> tidak ditemukan
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                <?php endif; ?>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" name="email" id="email">
+                                    <input type="email" class="form-control" name="email" id="email" value="<?php echo $nama_email; ?>">
                                 </div>
+                                <?php if ($password_salah == true) : ?>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        Password tidak cocok
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                <?php endif; ?>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control" name="password" id="password">
@@ -187,7 +203,7 @@ if (isset($_POST['daftar'])) {
                                 <button type="submit" name="login" class="w-100 pt-3 pb-3 btn btn-primary"><i class="bi bi-door-open-fill me-2"></i>Login</button>
                             </form>
                         </div>
-                        <div class="tab-pane fade" id="daftar" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="tab-pane fade show <?php echo $daftar_aktif ?>" id="daftar" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <form action="" method="POST">
                                 <div class="mt-3 mb-3">
                                     <h2 class="h2 text-dark mb-0">Daftar</h2>
@@ -196,6 +212,12 @@ if (isset($_POST['daftar'])) {
                                     <label for="usernameDaf" class="form-label">Username</label>
                                     <input type="text" class="form-control" name="usernameDaf" id="usernameDaf" required>
                                 </div>
+                                <?php if ($email_digunakan == true) : ?>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        Email <strong><?php echo $nama_notFound ?></strong> telah digunakan
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                <?php endif; ?>
                                 <div class="mb-3">
                                     <label for="emailDaf" class="form-label">Email address</label>
                                     <input type="email" class="form-control" name="emailDaf" id="emailDaf" required>
