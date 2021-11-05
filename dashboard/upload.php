@@ -52,6 +52,12 @@ if (isset($_POST["submit"])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../session/style-login.css">
     <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.tiny.cloud/1/1xrn42nc34pbg8nvbv5qaarngbn7j20qv8njdsi5gedhqzcx/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </script>
 
     <title><?php echo $user_name ?> - Dashboard</title>
 </head>
@@ -172,7 +178,7 @@ if (isset($_POST["submit"])) {
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
-                        <textarea class="form-control" name="deskripsi" id="exampleFormControlTextarea1" placeholder="Deskripsi barang" rows="3"></textarea require>
+                        <textarea id="mytextarea" class="form-control" name="deskripsi" id="exampleFormControlTextarea1" placeholder="Deskripsi barang" rows="3"></textarea require>
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary"><i class="bi bi-check2-circle me-2"></i>Submit</button>
                 </form>
