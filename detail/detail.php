@@ -15,8 +15,21 @@
 <?php
 session_start();
 require '../function.php';
+if (!isset($_GET['id'])) {
+    header("Location: ../");
+    exit;
+}
 $user_name = $_SESSION['user_name'];
 $kategori = $_GET['category'];
+$id = $_GET['id'];
+$succes = false;
+if (isset($_POST['comment'])) {
+    $komentar = $_POST['komentar'];
+    $koment = mysqli_query($conn, "INSERT INTO commentar (id,user,komentar) VALUES ($id,'$user_name','$komentar')");
+    if ($koment == true) {
+        $succes = true;
+    }
+}
 ?>
 
 <body class="bg-light">
@@ -25,8 +38,8 @@ $kategori = $_GET['category'];
             <a href="../" class="navbar-brand d-none d-sm-block nav text-dark">
                 Portal <span class="text-primary">Dagang</span>
             </a>
-            <form method="POST" class="d-flex me-2 form">
-                <input class="form-control me-2" name="input" type="search" placeholder="Cari barang" aria-label="Search">
+            <form method="POST" action="../" class="d-flex me-2 form">
+                <input class="form-control me-2" name="keyword" type="search" placeholder="Cari barang" aria-label="Search">
                 <button class="btn btn-primary" name="cari" type="submit"><i class="bi bi-search"></i></button>
             </form>
             <div class="dropdown">
@@ -120,9 +133,17 @@ $kategori = $_GET['category'];
                                     </div>
                                 </div>
                             </div>
-                            <form action="">
+                            <form action="" method="POST">
                                 <div class="mb-3">
                                     <label for="komentar" class="form-label fw-bold">Komentar</label>
+                                    <?php
+                                    if ($succes == true) :
+                                    ?>
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            Komentar ditambahkan
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    <?php endif; ?>
                                     <div class="d-flex">
                                         <input type="text" class="form-control me-2" name="komentar" id="komentar" placeholder="komentar anda">
                                         <button type="sumbit" name="comment" class="btn btn-primary"><i class="bi bi-chat-right-text-fill"></i></button>

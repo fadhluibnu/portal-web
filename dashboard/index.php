@@ -13,6 +13,12 @@ include '../function.php';
 $user_name = $_SESSION['user_name'];
 $id_user = $_SESSION['id_user'];
 $result = mysqli_query($conn, "SELECT * FROM barang WHERE id_user='$id_user'");
+
+if (isset($_POST['dashboard'])) {
+    $keyword = $_POST['keyword'];
+    $result = mysqli_query($conn, "SELECT * FROM barang WHERE id_user='$id_user' AND judul_barang LIKE '%$keyword%'");
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -41,8 +47,8 @@ $result = mysqli_query($conn, "SELECT * FROM barang WHERE id_user='$id_user'");
                 <a class="nav-link ms-2" href="upload.php">Tambah Produk</a>
             </div>
             <form method="POST" class="d-none d-lg-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <input class="form-control me-2" name="keyword" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-primary" name="dashboard" type="submit">Search</button>
             </form>
             <div class="d-none d-sm-block dropdown ms-3">
                 <button class="btn bg-light mt-2 mt-md-0 me-2 user text-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person me-2"></i><?php echo $user_name; ?>
