@@ -183,7 +183,8 @@ if (isset($_POST['cari'])) {
                                         </table>
                                         <div class="d-flex flex-column">
                                             <a href="../detail/detail.php?id=<?php echo $row['id'] ?>&category=<?php echo $row['kategori'] ?>" class="btn btn-primary mb-2"><i class="bi bi-eye me-2"></i>Detail</a>
-                                            <a href="https://api.whatsapp.com/send?phone=+62<?php echo $row['link'] ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a>
+                                            <!-- <a href="https://api.whatsapp.com/send?phone=+62<?php //echo $row['link'] 
+                                                                                                    ?>" class="btn btn-outline-primary"><i class="bi bi-chat-dots me-2"></i>Hubungi Penjual</a> -->
                                         </div>
                                     </div>
                                 </div>

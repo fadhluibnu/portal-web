@@ -80,13 +80,46 @@ if (isset($_POST['comment'])) {
                     <a href="#diskusi" class="nav-link diskusi text-dark">Produk Serupa</a>
                 </li>
             </ul>
-            <?php
-            $result_link = mysqli_query($conn, "SELECT * FROM barang WHERE id=$id");
-            while ($hubungi = mysqli_fetch_assoc($result_link)) : ?>
-                <a target="_blank" href="https://api.whatsapp.com/send?phone=+62<?php echo $hubungi['link'] ?>" class="btn btn-primary radius fixed-bottom sticky-sm-top p-3 ps-sm-3 pe-sm-3 pt-sm-2 pb-sm-2 ms-auto"><i class="bi bi-megaphone me-2"></i>Hubungi penjual</a>
-            <?php endwhile; ?>
+            <a type="button" class="btn btn-primary  radius fixed-bottom sticky-sm-top p-3 ps-sm-3 pe-sm-3 pt-sm-2 pb-sm-2 ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="bi bi-megaphone me-2"></i>Hubungi penjual
+            </a>
+            <a target="_blank" href="https://api.whatsapp.com/send?phone=+6281326237199" class="btn ms-2 btn-outline-danger ps-sm-3 pe-sm-3 pt-sm-2 pb-sm-2"><i class="bi bi-flag-fill me-2"></i>Report</a>
+
         </div>
     </nav>
+
+    <?php
+    $result_link = mysqli_query($conn, "SELECT * FROM barang WHERE id=$id");
+    while ($hubungi = mysqli_fetch_assoc($result_link)) : ?>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cara menangani penipuan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ol type="1">
+                            <li>
+                                <p class="text-dark">Lihat testimonial/komentar dari para pembeli sebelumnya</p>
+                            </li>
+                            <li>
+                                <p class="text-dark">Anda bisa cek nomor ini di <a target="_blank" href="https://kredibel.co.id">kredibel.co.id<i class="bi bi-box-arrow-up-right ms-1"></i></a> untuk memastikan bukan penipuan</p>
+                            </li>
+                            <li>
+                                <p class="text-dark">Anda juga bisa melakuakan pelaporan kepada tim kami dengan melalui tombol report</p>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a target="_blank" href="https://api.whatsapp.com/send?phone=+62<?php echo $hubungi['link'] ?>" class="btn btn-primary ps-sm-3 pe-sm-3 pt-sm-2 pb-sm-2"><i class="bi bi-megaphone me-2"></i>Hubungi penjual</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endwhile; ?>
 
 
     <div id="deskripsi" class="container-fluid bg-light deskripsiDetail">
