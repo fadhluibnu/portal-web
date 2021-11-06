@@ -125,7 +125,6 @@ if (isset($_POST['comment'])) {
                                 </tr>
                             </table>
                         </div>
-                        <?php endwhile; ?>
                     </div>
                     <div class="col-md-10 col-lg-3">
                         <div class="bg-white p-3 rounded sticky-top" style="top: 86px;">
@@ -159,9 +158,9 @@ if (isset($_POST['comment'])) {
                                 </div>
                             </form>
                         </div>
-                        
                     </div>
                 </div>
+                <?php endwhile; ?>
             </div>
         </div>
     </div>
@@ -224,6 +223,7 @@ if (isset($_POST['comment'])) {
                         </div>
                     </div>
                 </div>
+                <?php endwhile; ?>
             
         </div>
     </div>
