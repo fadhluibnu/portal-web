@@ -1,17 +1,6 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../session/style-login.css">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="style-aktif.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
-    <title>Hello, world!</title>
-</head>
-
 <?php
 session_start();
 require '../function.php';
@@ -19,11 +8,10 @@ if (!isset($_GET['id'])) {
     header("Location: ../");
     exit;
 }
-$result = mysqli_query($conn, "SELECT * FROM barang");
-$mentar = mysqli_query($conn, "SELECT * FROM commentar");
 $user_name = $_SESSION['user_name'];
 $kategori = $_GET['category'];
 $id = $_GET['id'];
+$result = mysqli_query($conn, "SELECT * FROM barang WHERE id=$id");
 $succes = false;
 if (isset($_POST['comment'])) {
     $komentar = $_POST['komentar'];
@@ -34,12 +22,38 @@ if (isset($_POST['comment'])) {
 }
 ?>
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../session/style-login.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style-aktif.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+    <?php $get_title = mysqli_query($conn, "SELECT * FROM barang WHERE id=$id");
+    $title = mysqli_fetch_assoc($get_title); ?>
+    <title><?php echo $title['judul_barang'] ?> - Detail</title>
+</head>
+
 <body class="bg-light">
     <nav class="navbar navbar-light bg-white">
         <div class="container pt-2 pb-2 flex-column flex-md-row">
-            <a href="../" class="navbar-brand d-none d-sm-block nav text-dark">
-                Portal <span class="text-primary">Dagang</span>
-            </a>
+            <div class="d-flex flex-column">
+                <a href="../" class="navbar-brand d-none d-sm-block nav text-dark pb-0">
+                    Portal <span class="text-primary">Dagang</span>
+                </a>
+                <div class="d-flex">
+                    <a target="_blank" class="navbar-brand pt-0" href="https://itfestpolsri.com/">
+                        <img src="../logo/00_LOGO ITFESTIVAL.png" alt="LOGO ITFESTIVAL" width="20" height="20">
+                    </a>
+                    <a target="_blank" class="navbar-brand pt-0" href="https://linktr.ee/HMJManajemenInformatika">
+                        <img src="../logo/Logo HMJMI.png" alt="Logo HMJMI" width="20" height="20">
+                    </a>
+                    <a target="_blank" class="navbar-brand pt-0" href="https://itfestpolsri.com/">
+                        <img src="../logo/logo-polsri.png" alt="logo polsri" width="20" height="20">
+                    </a>
+                </div>
+            </div>
             <form method="POST" action="../" class="d-flex me-2 form">
                 <input class="form-control me-2" name="keyword" type="search" placeholder="Cari barang" aria-label="Search">
                 <button class="btn btn-primary" name="cari" type="submit"><i class="bi bi-search"></i></button>
@@ -65,7 +79,11 @@ if (isset($_POST['comment'])) {
                     <a href="#diskusi" class="nav-link diskusi text-dark">Produk Serupa</a>
                 </li>
             </ul>
-            <a target="_blank" href="https://api.whatsapp.com/send?phone=" class="btn btn-primary fixed-bottom sticky-sm-top p-3 ps-sm-3 pe-sm-3 pt-sm-2 pb-sm-2 ms-auto"><i class="bi bi-megaphone me-2"></i>Hubungi penjual</a>
+            <?php
+            $result_link = mysqli_query($conn, "SELECT * FROM barang WHERE id=$id");
+            while ($hubungi = mysqli_fetch_assoc($result_link)) : ?>
+                <a target="_blank" href="https://api.whatsapp.com/send?phone=+62<?php echo $hubungi['link'] ?>" class="btn btn-primary radius fixed-bottom sticky-sm-top p-3 ps-sm-3 pe-sm-3 pt-sm-2 pb-sm-2 ms-auto"><i class="bi bi-megaphone me-2"></i>Hubungi penjual</a>
+            <?php endwhile; ?>
         </div>
     </nav>
 
@@ -74,93 +92,91 @@ if (isset($_POST['comment'])) {
         <div class="row">
             <div class="col-12">
                 <div id="satu" class="row justify-content-center">
-                    <?php  $i = 0;
+                    <?php $i = 0;
                     while ($row = mysqli_fetch_array($result)) :
                     ?>
-                    <div class="col-md-6 col-lg-4 mb-3 mb-lg-0">
-                        <div class="bg-white p-3 rounded sticky-top" style="top: 86px;">
-                            <div id="gambarAsli" class="gambar rounded"></div>
-                            <?php
-                            $gambar = $row['gambar'];
-                            ?>
-                            <style>
-                                .gambar {
-                                    width: 100%;
-                                    height: 300px;
-                                    background-color: wheat;
-                                    background-size: cover;
-                                    background-position: center;
-                                    background-image: url(../image/<?php echo $gambar ?>);
-                                }
-                            </style>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-5 mb-3 mb-lg-0">
-                        <div class="bg-white p-3 rounded sticky-top">
-                            <h1 class="detail text-dark"><?php //ini judul 
-                                                            ?></h1>
-                            <hr>
-                            <table>
-                                <tr>
-                                    <td>
-                                        <span class="text-dark fw-bold">Harga</span>
-                                    </td>
-                                    <td>:</td>
-                                    <td><span class="text-danger">Rp. <?php echo $row['harga'] 
-                                                                        ?></span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="text-dark fw-bold">Kategori</span></td>
-                                    <td>:</td>
-                                    <td><span class="text-dark"><?php echo $row['kategori']
-                                                                ?></span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="text-dark fw-bold">Deskripsi</span></td>
-                                    <td>:</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3"><span class="text-dark"><?php echo $row['deskripsi_barang']
-                                                                            ?></span></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-md-10 col-lg-3">
-                        <div class="bg-white p-3 rounded sticky-top" style="top: 86px;">
-                            <h5 class="h5">Komentar</h5>
-                            <div class="komentar">
-                                <?php  $i = 0;
-                                while ($row = mysqli_fetch_array($mentar)) : ?>
-                                <div class="mb-1">
-                                    <p class="text-dark mb-0">Komentar <span class=" fw-bold"><?php echo $row['user'] ?></span> :</p>
-                                    <div class="ps-3">
-                                        <p class="text-dark"><?php echo $row ['komentar']  ?></p>
-                                    </div>
-                                </div>
-                                <?php endwhile; ?>
+                        <div class="col-md-6 col-lg-4 mb-3 mb-lg-0">
+                            <div class="bg-white p-3 rounded sticky-top" style="top: 86px;">
+                                <div id="gambarAsli" class="gambar rounded"></div>
+                                <?php
+                                $gambar = $row['gambar'];
+                                ?>
+                                <style>
+                                    .gambar {
+                                        width: 100%;
+                                        height: 300px;
+                                        background-color: wheat;
+                                        background-size: cover;
+                                        background-position: center;
+                                        background-image: url(../image/<?php echo $gambar ?>);
+                                    }
+                                </style>
                             </div>
-                            <form action="" method="POST">
-                                <div class="mb-3">
-                                    <label for="komentar" class="form-label fw-bold">Komentar</label>
-                                    <?php
-                                    if ($succes == true) :
-                                    ?>
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                            Komentar ditambahkan
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    <?php endif; ?>
-                                    <div class="d-flex">
-                                        <input type="text" class="form-control me-2" name="komentar" id="komentar" placeholder="komentar anda">
-                                        <button type="sumbit" name="comment" class="btn btn-primary"><i class="bi bi-chat-right-text-fill"></i></button>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
-                    </div>
+                        <div class="col-md-6 col-lg-5 mb-3 mb-lg-0">
+                            <div class="bg-white p-3 rounded sticky-top">
+                                <h1 class="detail text-dark"><?php echo $row['judul_barang'] ?></h1>
+                                <hr>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <span class="text-dark fw-bold">Harga</span>
+                                        </td>
+                                        <td>:</td>
+                                        <td><span class="text-danger">Rp. <?php echo $row['harga'] ?></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="text-dark fw-bold">Kategori</span></td>
+                                        <td>:</td>
+                                        <td><span class="text-dark"><?php echo $row['kategori'] ?></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="text-dark fw-bold">Deskripsi</span></td>
+                                        <td>:</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"><span class="text-dark"><?php echo $row['deskripsi_barang'] ?></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-10 col-lg-3">
+                            <div class="bg-white p-3 rounded sticky-top" style="top: 86px;">
+                                <h5 class="h5">Komentar</h5>
+                                <div class="komentar">
+                                    <?php
+                                    $id_produk = $row['id'];
+                                    $mentar = mysqli_query($conn, "SELECT * FROM commentar WHERE id=$id_produk");
+                                    while ($row = mysqli_fetch_array($mentar)) : ?>
+                                        <div class="mb-1">
+                                            <p class="text-dark mb-0">Komentar <span class=" fw-bold"><?php echo $row['user'] ?></span> :</p>
+                                            <div class="ps-3">
+                                                <p class="text-dark"><?php echo $row['komentar']  ?></p>
+                                            </div>
+                                        </div>
+                                    <?php endwhile; ?>
+                                </div>
+                                <form action="" method="POST">
+                                    <div class="mb-3">
+                                        <label for="komentar" class="form-label fw-bold">Komentar</label>
+                                        <?php
+                                        if ($succes == true) :
+                                        ?>
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                Komentar ditambahkan
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        <?php endif; ?>
+                                        <div class="d-flex">
+                                            <input type="text" class="form-control me-2" name="komentar" id="komentar" placeholder="komentar anda">
+                                            <button type="sumbit" name="comment" class="btn btn-primary"><i class="bi bi-chat-right-text-fill"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                 </div>
-                <?php endwhile; ?>
+            <?php endwhile; ?>
             </div>
         </div>
     </div>
@@ -223,8 +239,8 @@ if (isset($_POST['comment'])) {
                         </div>
                     </div>
                 </div>
-                <?php endwhile; ?>
-            
+            <?php endwhile; ?>
+
         </div>
     </div>
     </div>

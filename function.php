@@ -35,7 +35,7 @@ function Tambah($data)
     $harga = htmlspecialchars($data['harga']);
     $link = htmlspecialchars($data['link']);
     $kategori = htmlspecialchars($data['kategori']);
-    $deskripsi_barang = htmlspecialchars($data['deskripsi']);
+    $deskripsi_barang = $data['deskripsi'];
 
     $gambar = upload();
     if (!$gambar) {
@@ -104,7 +104,7 @@ function ubah($data)
     $harga = htmlspecialchars($data["harga"]);
     $link = htmlspecialchars($data["link"]);
     $kategori = htmlspecialchars($data["kategori"]);
-    $deskripsi_barang = htmlspecialchars($data["deskripsi"]);
+    $deskripsi_barang = $data["deskripsi"];
 
     $gambarLama = htmlspecialchars($data["gambarLama"]);
 

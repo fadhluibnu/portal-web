@@ -153,6 +153,17 @@ if (isset($_POST['daftar'])) {
         <div class="row flex-column flex-md-row align-items-center">
             <div class="col-12 col-md-5 col-lg-6 mb-3 mb-md-0">
                 <h1 class="h1 text-dark">Portal <span class="text-primary">Dagang</span></h1>
+                <div class="d-flex">
+                    <a target="_blank" class="navbar-brand pt-0" href="https://itfestpolsri.com/">
+                        <img src="../logo/00_LOGO ITFESTIVAL.png" alt="LOGO ITFESTIVAL" width="70" height="70">
+                    </a>
+                    <a target="_blank" class="navbar-brand pt-0" href="https://linktr.ee/HMJManajemenInformatika">
+                        <img src="../logo/Logo HMJMI.png" alt="Logo HMJMI" width="70" height="70">
+                    </a>
+                    <a target="_blank" class="navbar-brand pt-0" href="https://itfestpolsri.com/">
+                        <img src="../logo/logo-polsri.png" alt="logo polsri" width="70" height="70">
+                    </a>
+                </div>
             </div>
             <div class="col-12 col-md-7 col-lg-6">
                 <div class="bg-white p-3 rounded">

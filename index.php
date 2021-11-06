@@ -37,9 +37,22 @@ if (isset($_POST["cari"])) {
 <body class="bg-light">
     <nav class="navbar navbar-light bg-white fixed-top">
         <div class="container pt-2 pb-2 flex-column flex-md-row">
-            <a href="" class="navbar-brand d-none d-sm-block nav text-dark">
-                Portal <span class="text-primary">Dagang</span>
-            </a>
+            <div class="d-flex flex-column">
+                <a href="" class="navbar-brand d-none d-sm-block nav text-dark pb-0">
+                    Portal <span class="text-primary">Dagang</span>
+                </a>
+                <div class="d-flex">
+                    <a target="_blank" class="navbar-brand pt-0" href="https://itfestpolsri.com/">
+                        <img src="logo/00_LOGO ITFESTIVAL.png" alt="LOGO ITFESTIVAL" width="20" height="20">
+                    </a>
+                    <a target="_blank" class="navbar-brand pt-0" href="https://linktr.ee/HMJManajemenInformatika">
+                        <img src="logo/Logo HMJMI.png" alt="Logo HMJMI" width="20" height="20">
+                    </a>
+                    <a target="_blank" class="navbar-brand pt-0" href="https://itfestpolsri.com/">
+                        <img src="logo/logo-polsri.png" alt="logo polsri" width="20" height="20">
+                    </a>
+                </div>
+            </div>
             <form method="POST" class="d-flex me-2 form">
                 <input class="form-control me-2" name="keyword" type="search" placeholder="Cari barang" aria-label="Search" autocomplete="off">
                 <button class="btn btn-primary" name="cari" type="submit"><i class="bi bi-search"></i></button>
@@ -56,7 +69,7 @@ if (isset($_POST["cari"])) {
     </nav>
     <div class="mt-5 pb-5">
     </div>
-    <div class="container-fluid pt-5 pt-md-0">
+    <div class="container-fluid pt-5 pt-md-4">
         <div class="row justify-content-center" style="height: 700px;">
             <div class="col col-md-3 fixed-bottom sticky-md-top">
                 <div class="bg-white p-3 rounded">

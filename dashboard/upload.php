@@ -65,9 +65,22 @@ if (isset($_POST["submit"])) {
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
-            <a class="navbar-brand nav text-dark pe-4 border-end" href="../">
-                Portal <span class="text-primary ms-1">Dagang</span>
-            </a>
+            <div class="d-flex flex-column border-end">
+                <a class="navbar-brand nav text-dark pe-1" href="../">
+                    Portal <span class="text-primary ms-1">Dagang</span>
+                </a>
+                <div class="d-flex">
+                    <a target="_blank" class="navbar-brand pt-0" href="https://itfestpolsri.com/">
+                        <img src="../logo/00_LOGO ITFESTIVAL.png" alt="LOGO ITFESTIVAL" width="20" height="20">
+                    </a>
+                    <a target="_blank" class="navbar-brand pt-0" href="https://linktr.ee/HMJManajemenInformatika">
+                        <img src="../logo/Logo HMJMI.png" alt="Logo HMJMI" width="20" height="20">
+                    </a>
+                    <a target="_blank" class="navbar-brand pt-0" href="https://itfestpolsri.com/">
+                        <img src="../logo/logo-polsri.png" alt="logo polsri" width="20" height="20">
+                    </a>
+                </div>
+            </div>
             <div class="navbar-nav d-none d-sm-flex flex-row me-auto">
                 <a class="nav-link" href="../dashboard/">Semua Produk</a>
                 <a class="nav-link ms-2 active" aria-current="page" href="">Tambah Produk</a>

@@ -49,6 +49,12 @@ if (isset($_POST["submit"])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../session/style-login.css">
     <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.tiny.cloud/1/1xrn42nc34pbg8nvbv5qaarngbn7j20qv8njdsi5gedhqzcx/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </script>
 
     <title><?php echo $user_name ?> - Dashboard</title>
 </head>
@@ -56,9 +62,22 @@ if (isset($_POST["submit"])) {
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
-            <a class="navbar-brand nav text-dark pe-4 border-end" href="../">
-                Portal <span class="text-primary ms-1">Dagang</span>
-            </a>
+            <div class="d-flex flex-column border-end">
+                <a class="navbar-brand nav text-dark pe-1" href="../">
+                    Portal <span class="text-primary ms-1">Dagang</span>
+                </a>
+                <div class="d-flex">
+                    <a target="_blank" class="navbar-brand pt-0" href="https://itfestpolsri.com/">
+                        <img src="../logo/00_LOGO ITFESTIVAL.png" alt="LOGO ITFESTIVAL" width="20" height="20">
+                    </a>
+                    <a target="_blank" class="navbar-brand pt-0" href="https://linktr.ee/HMJManajemenInformatika">
+                        <img src="../logo/Logo HMJMI.png" alt="Logo HMJMI" width="20" height="20">
+                    </a>
+                    <a target="_blank" class="navbar-brand pt-0" href="https://itfestpolsri.com/">
+                        <img src="../logo/logo-polsri.png" alt="logo polsri" width="20" height="20">
+                    </a>
+                </div>
+            </div>
             <div class="navbar-nav d-none d-sm-flex flex-row me-auto">
                 <a class="nav-link" href="../dashboard/">Semua Produk</a>
                 <a class="nav-link ms-2 active" aria-current="page" href="">Tambah Produk</a>
@@ -191,7 +210,7 @@ if (isset($_POST["submit"])) {
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
-                        <textarea class="form-control" name="deskripsi" id="exampleFormControlTextarea1" placeholder="" rows="3"><?php echo $barang['deskripsi_barang'] ?></textarea>
+                        <textarea id="mytextarea" class="form-control" name="deskripsi" id="exampleFormControlTextarea1" placeholder="" rows="3"><?php echo $barang['deskripsi_barang'] ?></textarea>
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary"><i class="bi bi-check2-circle me-2"></i>Submit</button>
                 </form>

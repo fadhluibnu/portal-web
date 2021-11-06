@@ -16,3 +16,8 @@
 .text-produk {
   color: #a0a5d7;
 }
+@media (max-width: 575.98px) {
+  .radius {
+    border-radius: 0 !important;
+  }
+}
