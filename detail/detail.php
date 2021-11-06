@@ -30,6 +30,7 @@ if (isset($_POST['comment'])) {
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="style-aktif.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+    <link rel="shortcut icon" href="../logo/favicon.png">
     <?php $get_title = mysqli_query($conn, "SELECT * FROM barang WHERE id=$id");
     $title = mysqli_fetch_assoc($get_title); ?>
     <title><?php echo $title['judul_barang'] ?> - Detail</title>

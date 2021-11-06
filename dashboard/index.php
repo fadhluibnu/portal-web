@@ -32,6 +32,7 @@ if (isset($_POST['dashboard'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../session/style-login.css">
     <link rel="stylesheet" href="../style.css">
+    <link rel="shortcut icon" href="../logo/favicon.png">
 
     <title><?php echo $user_name ?> - Dashboard</title>
 </head>

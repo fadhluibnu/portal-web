@@ -145,6 +145,7 @@ if (isset($_POST['daftar'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="style-login.css">
+    <link rel="shortcut icon" href="../logo/favicon.png">
     <title>Login - Portal Dagang</title>
 </head>
 

@@ -49,6 +49,7 @@ if (isset($_POST["submit"])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../session/style-login.css">
     <link rel="stylesheet" href="../style.css">
+    <link rel="shortcut icon" href="../logo/favicon.png">
     <script src="https://cdn.tiny.cloud/1/1xrn42nc34pbg8nvbv5qaarngbn7j20qv8njdsi5gedhqzcx/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
