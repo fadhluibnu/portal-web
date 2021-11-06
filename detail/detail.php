@@ -19,6 +19,8 @@ if (!isset($_GET['id'])) {
     header("Location: ../");
     exit;
 }
+$result = mysqli_query($conn, "SELECT * FROM barang");
+$mentar = mysqli_query($conn, "SELECT * FROM commentar");
 $user_name = $_SESSION['user_name'];
 $kategori = $_GET['category'];
 $id = $_GET['id'];
@@ -67,17 +69,19 @@ if (isset($_POST['comment'])) {
         </div>
     </nav>
 
+
     <div id="deskripsi" class="container-fluid bg-light deskripsiDetail">
         <div class="row">
             <div class="col-12">
                 <div id="satu" class="row justify-content-center">
-                    <?php //muali loop 
+                    <?php  $i = 0;
+                    while ($row = mysqli_fetch_array($result)) :
                     ?>
                     <div class="col-md-6 col-lg-4 mb-3 mb-lg-0">
                         <div class="bg-white p-3 rounded sticky-top" style="top: 86px;">
                             <div id="gambarAsli" class="gambar rounded"></div>
                             <?php
-                            $gambar = $gambar/* ini gambar */;
+                            $gambar = $row['gambar'];
                             ?>
                             <style>
                                 .gambar {
@@ -102,13 +106,13 @@ if (isset($_POST['comment'])) {
                                         <span class="text-dark fw-bold">Harga</span>
                                     </td>
                                     <td>:</td>
-                                    <td><span class="text-danger">Rp. <?php //ini harga 
+                                    <td><span class="text-danger">Rp. <?php echo $row['harga'] 
                                                                         ?></span></td>
                                 </tr>
                                 <tr>
                                     <td><span class="text-dark fw-bold">Kategori</span></td>
                                     <td>:</td>
-                                    <td><span class="text-dark"><?php //ini kategori 
+                                    <td><span class="text-dark"><?php echo $row['kategori']
                                                                 ?></span></td>
                                 </tr>
                                 <tr>
@@ -116,23 +120,26 @@ if (isset($_POST['comment'])) {
                                     <td>:</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3"><span class="text-dark"><?php //ini deskripsi 
+                                    <td colspan="3"><span class="text-dark"><?php echo $row['deskripsi_barang']
                                                                             ?></span></td>
                                 </tr>
                             </table>
                         </div>
+                        <?php endwhile; ?>
                     </div>
                     <div class="col-md-10 col-lg-3">
                         <div class="bg-white p-3 rounded sticky-top" style="top: 86px;">
                             <h5 class="h5">Komentar</h5>
                             <div class="komentar">
-                                <?php /* mulai loop komentar */ ?>
+                                <?php  $i = 0;
+                                while ($row = mysqli_fetch_array($mentar)) : ?>
                                 <div class="mb-1">
-                                    <p class="text-dark mb-0">Komentar <span class=" fw-bold"><?php /* user dari komentar */ ?></span> :</p>
+                                    <p class="text-dark mb-0">Komentar <span class=" fw-bold"><?php echo $row['user'] ?></span> :</p>
                                     <div class="ps-3">
-                                        <p class="text-dark"><?php /* komentar */ ?></p>
+                                        <p class="text-dark"><?php echo $row ['komentar']  ?></p>
                                     </div>
                                 </div>
+                                <?php endwhile; ?>
                             </div>
                             <form action="" method="POST">
                                 <div class="mb-3">
@@ -152,11 +159,13 @@ if (isset($_POST['comment'])) {
                                 </div>
                             </form>
                         </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    >
     <div id="diskusi" class="container diskusiDetail mt-5" style="height: 500px;">
         <div class="d-flex align-items-center justify-content-between">
             <span class="garis1 rounded"></span>
@@ -215,7 +224,7 @@ if (isset($_POST['comment'])) {
                         </div>
                     </div>
                 </div>
-            <?php endwhile; ?>
+            
         </div>
     </div>
     </div>
