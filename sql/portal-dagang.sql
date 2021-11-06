@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2021 at 11:31 AM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.8
+-- Waktu pembuatan: 06 Nov 2021 pada 12.38
+-- Versi server: 10.4.20-MariaDB
+-- Versi PHP: 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `barang`
+-- Struktur dari tabel `barang`
 --
 
 CREATE TABLE `barang` (
@@ -32,7 +32,7 @@ CREATE TABLE `barang` (
   `id_user` char(70) NOT NULL,
   `judul_barang` varchar(70) NOT NULL,
   `deskripsi_barang` varchar(70) NOT NULL,
-  `gambar` blob NOT NULL,
+  `gambar` varchar(100) NOT NULL,
   `kategori` varchar(60) NOT NULL,
   `harga` varchar(70) NOT NULL,
   `link` varchar(70) NOT NULL
@@ -41,7 +41,20 @@ CREATE TABLE `barang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `commentar`
+--
+
+CREATE TABLE `commentar` (
+  `id_komentar` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `user` varchar(60) NOT NULL,
+  `komentar` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -57,44 +70,46 @@ CREATE TABLE `user` (
 --
 
 --
--- Indexes for table `barang`
+-- Indeks untuk tabel `barang`
 --
 ALTER TABLE `barang`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_user` (`id_user`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `commentar`
+--
+ALTER TABLE `commentar`
+  ADD PRIMARY KEY (`id_komentar`),
+  ADD KEY `id` (`id`);
+
+--
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id_user` (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `barang`
+-- AUTO_INCREMENT untuk tabel `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `commentar`
+--
+ALTER TABLE `commentar`
+  MODIFY `id_komentar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `barang`
---
-ALTER TABLE `barang`
-  ADD CONSTRAINT `barang_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
