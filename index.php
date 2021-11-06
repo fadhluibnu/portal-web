@@ -5,14 +5,9 @@ if (!isset($_SESSION['masuk'])) {
     exit;
 }
 
-// if (isset($_COOKIE['keluar']) == 'true') {
-//     header("Location: session/");
-//     exit;
-// }
-
 require 'function.php';
 $user_name = $_SESSION['user_name'];
-$result = mysqli_query($conn, "SELECT * FROM barang");
+$result = mysqli_query($conn, "SELECT * FROM barang ORDER BY id DESC");
 
 if (isset($_POST["cari"])) {
     $result = cari($_POST["keyword"]);

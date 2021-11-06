@@ -12,7 +12,7 @@ if (isset($_COOKIE['keluar']) == 'true') {
 include '../function.php';
 $user_name = $_SESSION['user_name'];
 $id_user = $_SESSION['id_user'];
-$result = mysqli_query($conn, "SELECT * FROM barang WHERE id_user='$id_user'");
+$result = mysqli_query($conn, "SELECT * FROM barang WHERE id_user='$id_user' ORDER BY id DESC");
 
 if (isset($_POST['dashboard'])) {
     $keyword = $_POST['keyword'];

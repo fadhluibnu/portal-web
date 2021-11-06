@@ -11,15 +11,15 @@ if (isset($_COOKIE['keluar']) == 'true') {
     exit;
 }
 $user_name = $_SESSION['user_name'];
-$result = mysqli_query($conn, "SELECT * FROM barang");
+$result = mysqli_query($conn, "SELECT * FROM barang ORDER BY id DESC");
 if (isset($_GET['category'])) {
     $kategori = $_GET['category'];
-    $result = mysqli_query($conn, "SELECT * FROM barang WHERE kategori LIKE '%$kategori%'");
+    $result = mysqli_query($conn, "SELECT * FROM barang WHERE kategori LIKE '%$kategori%' ORDER BY id DESC");
 }
 if (isset($_POST['cari'])) {
     $kategori = $_GET['category'];
     $input = $_POST['input'];
-    $result = mysqli_query($conn, "SELECT * FROM barang WHERE kategori LIKE '%$kategori%' AND judul_barang LIKE '%$input%'");
+    $result = mysqli_query($conn, "SELECT * FROM barang WHERE kategori LIKE '%$kategori%' AND judul_barang LIKE '%$input%' ORDER BY id DESC");
 }
 ?>
 <!doctype html>
